@@ -19,7 +19,7 @@ require('../../functional.js');
 const waitFor = require('../../../common/utils/wait_for');
 const SwaggerEndpoint = require('../../../common/swagger_spec');
 const apiHelpers = require('../../../common/helpers/api');
-const slots = require('../../../../src/modules/chain/helpers/slots');
+const slots = require('../../../../../src/modules/chain/helpers/slots');
 
 const expectSwaggerParamError = apiHelpers.expectSwaggerParamError;
 

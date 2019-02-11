@@ -19,12 +19,12 @@ const lisk = require('lisk-elements').default;
 const Promise = require('bluebird');
 const accountFixtures = require('../../../fixtures/accounts');
 const phases = require('../../../common/phases');
-const Bignum = require('../../../../src/modules/chain/helpers/bignum.js');
+const Bignum = require('../../../../../src/modules/chain/helpers/bignum.js');
 const randomUtil = require('../../../common/utils/random');
 const waitFor = require('../../../common/utils/wait_for');
 const elements = require('../../../common/utils/elements');
 const apiHelpers = require('../../../common/helpers/api');
-const errorCodes = require('../../../../src/modules/chain/helpers/api_codes');
+const errorCodes = require('../../../../../src/modules/chain/helpers/api_codes');
 const common = require('./common');
 
 const { FEES, NORMALIZER } = global.constants;

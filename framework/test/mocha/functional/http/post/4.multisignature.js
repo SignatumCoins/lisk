@@ -19,13 +19,13 @@ const lisk = require('lisk-elements').default;
 const phases = require('../../../common/phases');
 const Scenarios = require('../../../common/scenarios');
 const accountFixtures = require('../../../fixtures/accounts');
-const apiCodes = require('../../../../src/modules/chain/helpers/api_codes');
+const apiCodes = require('../../../../../src/modules/chain/helpers/api_codes');
 const randomUtil = require('../../../common/utils/random');
 const waitFor = require('../../../common/utils/wait_for');
 const elements = require('../../../common/utils/elements');
 const SwaggerEndpoint = require('../../../common/swagger_spec');
 const apiHelpers = require('../../../common/helpers/api');
-const errorCodes = require('../../../../src/modules/chain/helpers/api_codes');
+const errorCodes = require('../../../../../src/modules/chain/helpers/api_codes');
 const common = require('./common');
 
 const { FEES, MULTISIG_CONSTRAINTS } = global.constants;

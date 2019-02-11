@@ -18,12 +18,12 @@ require('../../functional.js');
 const Promise = require('bluebird');
 const lisk = require('lisk-elements').default;
 const accountFixtures = require('../../../fixtures/accounts');
-const transactionTypes = require('../../../../src/modules/chain/helpers/transaction_types');
+const transactionTypes = require('../../../../../src/modules/chain/helpers/transaction_types');
 const randomUtil = require('../../../common/utils/random');
 const waitFor = require('../../../common/utils/wait_for');
 const apiHelpers = require('../../../common/helpers/api');
 const SwaggerEndpoint = require('../../../common/swagger_spec');
-const slots = require('../../../../src/modules/chain/helpers/slots');
+const slots = require('../../../../../src/modules/chain/helpers/slots');
 
 const { NORMALIZER } = global.constants;
 const expectSwaggerParamError = apiHelpers.expectSwaggerParamError;

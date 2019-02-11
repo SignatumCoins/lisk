@@ -15,7 +15,7 @@
 'use strict';
 
 require('../../functional.js');
-const genesisDelegates = require('../../../data/genesis_delegates.json');
+const genesisDelegates = require('../../../../data/genesis_delegates.json');
 const SwaggerEndpoint = require('../../../common/swagger_spec');
 const apiHelpers = require('../../../common/helpers/api');
 

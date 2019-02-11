@@ -19,7 +19,8 @@ const lisk = require('lisk-elements').default;
 const WAMPServer = require('wamp-socket-cluster/WAMPServer');
 const phases = require('../../../common/phases');
 const randomUtil = require('../../../common/utils/random');
-const wsRPC = require('../../../../src/modules/chain/api/ws/rpc/ws_rpc').wsRPC;
+const wsRPC = require('../../../../../src/modules/chain/api/ws/rpc/ws_rpc')
+	.wsRPC;
 const WsTestClient = require('../../../common/ws/client');
 
 describe('Posting transaction (type 0)', async () => {

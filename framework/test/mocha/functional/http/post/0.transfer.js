@@ -23,8 +23,8 @@ const phases = require('../../../common/phases');
 const sendTransactionPromise = require('../../../common/helpers/api')
 	.sendTransactionPromise;
 const randomUtil = require('../../../common/utils/random');
-const errorCodes = require('../../../../src/modules/chain/helpers/api_codes');
-const Bignum = require('../../../../src/modules/chain/helpers/bignum.js');
+const errorCodes = require('../../../../../src/modules/chain/helpers/api_codes');
+const Bignum = require('../../../../../src/modules/chain/helpers/bignum.js');
 
 const { NORMALIZER } = global.constants;
 

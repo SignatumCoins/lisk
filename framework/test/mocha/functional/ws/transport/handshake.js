@@ -18,7 +18,7 @@ require('../../functional.js');
 const WAMPClient = require('wamp-socket-cluster/WAMPClient');
 const randomstring = require('randomstring');
 const scClient = require('socketcluster-client');
-const failureCodes = require('../../../../src/modules/chain/api/ws/rpc/failure_codes');
+const failureCodes = require('../../../../../src/modules/chain/api/ws/rpc/failure_codes');
 const wsServer = require('../../../common/ws/server');
 const WSServerMaster = require('../../../common/ws/server_master');
 

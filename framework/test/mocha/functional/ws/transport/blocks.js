@@ -16,7 +16,8 @@
 
 require('../../functional.js');
 const WAMPServer = require('wamp-socket-cluster/WAMPServer');
-const wsRPC = require('../../../../src/modules/chain/api/ws/rpc/ws_rpc').wsRPC;
+const wsRPC = require('../../../../../src/modules/chain/api/ws/rpc/ws_rpc')
+	.wsRPC;
 const WsTestClient = require('../../../common/ws/client');
 
 describe('WS transport blocks', async () => {

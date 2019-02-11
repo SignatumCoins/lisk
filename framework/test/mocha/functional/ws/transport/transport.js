@@ -18,8 +18,9 @@ require('../../functional.js');
 const async = require('async');
 const WAMPServer = require('wamp-socket-cluster/WAMPServer');
 const prefixedPeer = require('../../../fixtures/peers').randomNormalizedPeer;
-const Rules = require('../../../../src/modules/chain/api/ws/workers/rules');
-const wsRPC = require('../../../../src/modules/chain/api/ws/rpc/ws_rpc').wsRPC;
+const Rules = require('../../../../../src/modules/chain/api/ws/workers/rules');
+const wsRPC = require('../../../../../src/modules/chain/api/ws/rpc/ws_rpc')
+	.wsRPC;
 const WsTestClient = require('../../../common/ws/client');
 
 describe('RPC', async () => {
