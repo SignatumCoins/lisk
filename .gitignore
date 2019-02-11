@@ -33,7 +33,7 @@ Session.vim
 sftp-config.json
 framework/test/mocha/network/pm2.network.json
 framework/test/mocha/network/configs/
-framework/test/mocha/network/networktest/mocha/sLogger.logs
+framework/test/mocha/network/networkTestsLogger.logs
 
 # Coverage directory used by tools like istanbul
 .coverage-unit/
