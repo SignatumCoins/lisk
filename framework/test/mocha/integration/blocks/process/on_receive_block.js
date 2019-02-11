@@ -22,7 +22,7 @@ const Promise = require('bluebird');
 const PQ = require('pg-promise').ParameterizedQuery;
 const accountFixtures = require('../../../fixtures/accounts');
 const slots = require('../../../../../src/modules/chain/helpers/slots');
-const genesisDelegates = require('../../../../data/genesis_delegates.json')
+const genesisDelegates = require('../../../data/genesis_delegates.json')
 	.delegates;
 const application = require('../../../common/application.js');
 

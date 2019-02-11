@@ -14,7 +14,7 @@
 
 'use strict';
 
-const genesisDelegates = require('../../../../../../data/genesis_delegates.json');
+const genesisDelegates = require('../../../../../data/genesis_delegates.json');
 const accountFixtures = require('.../../../../../../../fixtures/accounts');
 const application = require('../../../../../common/application');
 const BlockReward = require('../../../../../../../src/modules/chain/logic/block_reward');

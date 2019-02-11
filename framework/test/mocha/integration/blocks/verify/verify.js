@@ -27,7 +27,7 @@ const modulesLoader = require('../../../common/modules_loader');
 const random = require('../../../common/utils/random');
 const slots = require('../../../../../src/modules/chain/helpers/slots.js');
 const accountFixtures = require('../../../fixtures/accounts');
-const genesisDelegates = require('../../../../data/genesis_delegates.json')
+const genesisDelegates = require('../../../data/genesis_delegates.json')
 	.delegates;
 const blockVersion = require('../../../../../src/modules/chain/logic/block_version.js');
 
