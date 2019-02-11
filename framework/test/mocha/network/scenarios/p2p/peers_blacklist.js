@@ -16,7 +16,7 @@
 
 const fs = require('fs');
 const util = require('util');
-const Peer = require('../../../../src/modules/chain/logic/peer');
+const Peer = require('../../../../../src/modules/chain/logic/peer');
 const utils = require('../../utils');
 
 const fs_writeFile = util.promisify(fs.writeFile);

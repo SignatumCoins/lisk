@@ -16,7 +16,7 @@
 
 const util = require('util');
 const exec = util.promisify(require('child_process').exec);
-const { createLoggerComponent } = require('../../../src/components/logger');
+const { createLoggerComponent } = require('../../../../src/components/logger');
 
 module.exports = {
 	http: require('./http'),
