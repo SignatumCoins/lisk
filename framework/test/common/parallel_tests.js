@@ -14,25 +14,22 @@
 
 'use strict';
 
-const child_process = require('child_process');
+const { spawn } = require('child_process');
 const find = require('find');
 
 const maxParallelism = 20;
 
 const executeWithIstanbul = (path, mochaArguments) => {
 	const coverageArguments = [
-		'cover',
-		'--dir',
-		'test/.coverage-unit',
-		'--include-pid',
-		'--print',
-		'none',
+		'--report-dir',
+		'framework/test/mocha/.coverage-unit',
+		'--silent',
 		'node_modules/.bin/_mocha',
 		path,
 	];
 	const istanbulArguments = coverageArguments.concat(mochaArguments);
 
-	return child_process.spawn('node_modules/.bin/istanbul', istanbulArguments, {
+	return spawn('node_modules/.bin/nyc', istanbulArguments, {
 		cwd: `${__dirname}/../../..`,
 		detached: true,
 		stdio: 'inherit',
@@ -84,10 +81,10 @@ const getMochaArguments = tag => {
 	const mochaArguments = [];
 	switch (tag) {
 		case 'slow':
-			mochaArguments.push('--', '--grep', '@slow');
+			mochaArguments.push('--grep', '@slow');
 			break;
 		case 'unstable':
-			mochaArguments.push('--', '--grep', '@unstable');
+			mochaArguments.push('--grep', '@unstable');
 			break;
 		case 'sequential':
 			/**
@@ -95,10 +92,10 @@ const getMochaArguments = tag => {
 			 * are going to be run sequentially after all parallel
 			 * tests were executed.
 			 */
-			mochaArguments.push('--', '--grep', '@sequential');
+			mochaArguments.push('--grep', '@sequential');
 			break;
 		case 'extensive':
-			mochaArguments.push('--', '--grep', '@unstable|@sequential', '--invert');
+			mochaArguments.push('--grep', '@unstable|@sequential', '--invert');
 			break;
 		default:
 			/**
@@ -106,12 +103,7 @@ const getMochaArguments = tag => {
 			 * is provided because sequential tests can conflict if
 			 * they are run in parallel with other tests.
 			 */
-			mochaArguments.push(
-				'--',
-				'--grep',
-				'@slow|@unstable|@sequential',
-				'--invert'
-			);
+			mochaArguments.push('--grep', '@slow|@unstable|@sequential', '--invert');
 			break;
 	}
 
