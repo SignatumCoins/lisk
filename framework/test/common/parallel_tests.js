@@ -19,7 +19,7 @@ const find = require('find');
 
 const maxParallelism = 20;
 
-const executeWithIstanbul = (path, mochaArguments) => {
+const executeWithNyc = (path, mochaArguments) => {
 	const coverageArguments = [
 		'--report-dir',
 		'framework/test/mocha/.coverage-unit',
@@ -27,9 +27,9 @@ const executeWithIstanbul = (path, mochaArguments) => {
 		'node_modules/.bin/_mocha',
 		path,
 	];
-	const istanbulArguments = coverageArguments.concat(mochaArguments);
+	const nycArguments = coverageArguments.concat(mochaArguments);
 
-	return spawn('node_modules/.bin/nyc', istanbulArguments, {
+	return spawn('node_modules/.bin/nyc', nycArguments, {
 		cwd: `${__dirname}/../../..`,
 		detached: true,
 		stdio: 'inherit',
@@ -112,7 +112,7 @@ const getMochaArguments = tag => {
 
 const spawnParallelTest = (testFile, mochaArguments) =>
 	new Promise((resolve, reject) => {
-		const child = executeWithIstanbul(testFile, mochaArguments);
+		const child = executeWithNyc(testFile, mochaArguments);
 
 		console.info(
 			`Running parallel the test: ${testFile} as a separate process - pid: ${
@@ -184,7 +184,7 @@ const runParallelTests = (suiteFolder, mochaArguments) =>
 
 const runSequentialTests = (suiteFolder, mochaArguments) =>
 	new Promise((resolve, reject) => {
-		const child = executeWithIstanbul(suiteFolder, mochaArguments);
+		const child = executeWithNyc(suiteFolder, mochaArguments);
 		child.on('close', code => {
 			if (code === 0) {
 				console.info('All sequential tests finished successfully.');
