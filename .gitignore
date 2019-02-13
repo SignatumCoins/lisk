@@ -35,7 +35,7 @@ framework/test/network/pm2.network.json
 framework/test/network/configs/
 framework/test/network/networkTestsLogger.logs
 
-# Coverage directory used by tools like istanbul
+# Coverage directory used by tools like nyc
 .coverage-unit/
 .nyc_output/
 # Local config file useful for development
