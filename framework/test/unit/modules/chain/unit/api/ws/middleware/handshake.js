@@ -40,6 +40,9 @@ describe('Handshake', async () => {
 			nonce: validNodeNonce,
 			blackListedPeers: [],
 		},
+		components: {
+			logger: __testContext.logger,
+		},
 	};
 	let validHeaders;
 

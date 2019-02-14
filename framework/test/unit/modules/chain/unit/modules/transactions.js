@@ -172,7 +172,7 @@ describe('transactions', async () => {
 									transaction: result.transactionLogic,
 									account: result.accountLogic,
 								},
-								storage: storageStub,
+								components: { storage: storageStub },
 								config: {
 									loading: {
 										snapshot: false,
@@ -223,7 +223,7 @@ describe('transactions', async () => {
 				modulesLoader.initModule(
 					TransactionModule,
 					{
-						storage: storageStub,
+						components: { storage: storageStub },
 						logic: { transaction: result.transactionLogic },
 					},
 					(initModuleErr, __transactionModule) => {

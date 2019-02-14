@@ -33,7 +33,7 @@ describe('delegates', async () => {
 			{ sandbox: { name: 'lisk_test_modules_delegates' } },
 			(err, scope) => {
 				library = scope;
-				storage = scope.storage;
+				storage = scope.components.storage;
 
 				// Set delegates module as loaded to allow manual forging
 				library.rewiredModules.delegates.__set__('__private.loaded', true);

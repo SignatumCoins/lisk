@@ -394,7 +394,10 @@ describe('node', async () => {
 				});
 
 				it('should call callback with result containing commit = library.commit', done => {
-					expect(getConstantsResult).to.have.property('commit', library.commit);
+					expect(getConstantsResult).to.have.property(
+						'commit',
+						library.lastCommit
+					);
 					done();
 				});
 

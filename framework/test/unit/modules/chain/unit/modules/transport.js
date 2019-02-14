@@ -201,8 +201,10 @@ describe('transport', async () => {
 				transaction: transactionStub,
 				peers: peersStub,
 			},
-			storage: storageStub,
-			logger: loggerStub,
+			components: {
+				storage: storageStub,
+				logger: loggerStub,
+			},
 			bus: busStub,
 			schema: schemaStub,
 			network: networkStub,

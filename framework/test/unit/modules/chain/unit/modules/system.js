@@ -59,8 +59,7 @@ describe('system', async () => {
 				done();
 			},
 			{
-				logger: loggerStub,
-				storage: storageStub,
+				components: { logger: loggerStub, storage: storageStub },
 				config: dummyConfig,
 			}
 		);
