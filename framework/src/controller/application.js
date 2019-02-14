@@ -91,6 +91,7 @@ module.exports = class Application {
 		}
 
 		validator.loadSchema(schema);
+		validator.validate(schema.genesisBlock, genesisBlock);
 		validator.validate(schema.appLabel, label);
 		validator.validate(schema.constants, constants);
 		validator.validate(schema.config, config);
