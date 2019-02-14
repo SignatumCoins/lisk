@@ -1411,7 +1411,7 @@ describe('transport', () => {
 		});
 
 		describe('onBroadcastBlock', () => {
-			describe('when broadcast is defined', async () => {
+			describe('when broadcast is defined', () => {
 				beforeEach(async () => {
 					block = {
 						id: '6258354802676165798',

@@ -79,8 +79,8 @@ describe('ws_rpc', () => {
 				wsRPC.setServer(serverMock);
 			});
 
-			describe('getServerAuthKey', async () => {
-				describe('when wsServer is defined', async () => {
+			describe('getServerAuthKey', () => {
+				describe('when wsServer is defined', () => {
 					beforeEach(async () => {
 						result = wsRPC.getServerAuthKey();
 					});
