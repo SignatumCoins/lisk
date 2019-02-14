@@ -27,7 +27,7 @@ const connectRewired = rewire(
 const validRPCProcedureName = 'rpcProcedureA';
 const validEventProcedureName = 'eventProcedureB';
 
-describe('connect', async () => {
+describe('connect', () => {
 	let validPeer;
 	let connectResult;
 	let addConnectionOptionsSpySpy;
@@ -101,8 +101,8 @@ describe('connect', async () => {
 		sinonSandbox.restore();
 	});
 
-	describe('connect', async () => {
-		describe('connectSteps order', async () => {
+	describe('connect', () => {
+		describe('connectSteps order', () => {
 			beforeEach(async () => {
 				connectResult = connectRewired(validPeer, loggerMock, peersHeadersMock);
 			});
@@ -148,10 +148,10 @@ describe('connect', async () => {
 		});
 	});
 
-	describe('connectionSteps', async () => {
+	describe('connectionSteps', () => {
 		let peerAsResult;
 
-		describe('addConnectionOptions', async () => {
+		describe('addConnectionOptions', () => {
 			let originalSystemHeaders;
 
 			beforeEach(async () => {
@@ -197,7 +197,7 @@ describe('connect', async () => {
 					'connectionOptions.query'
 				));
 
-			describe('connectionOptions.query', async () => {
+			describe('connectionOptions.query', () => {
 				it('should contain protocolVersion if present on peers headers', async () =>
 					expect(peerAsResult)
 						.to.have.nested.property('connectionOptions.query.protocolVersion')
@@ -233,7 +233,7 @@ describe('connect', async () => {
 				expect(peerAsResult).to.eql(validPeer));
 		});
 
-		describe('addSocket', async () => {
+		describe('addSocket', () => {
 			let scClientConnectStub;
 			let validConnectionOptions;
 			before(async () => {
@@ -275,7 +275,7 @@ describe('connect', async () => {
 				expect(peerAsResult).to.eql(validPeer));
 		});
 
-		describe('upgradeSocketAsWAMPClient', async () => {
+		describe('upgradeSocketAsWAMPClient', () => {
 			let upgradeToWAMPSpy;
 			let validSocket;
 			before(async () => {
@@ -311,7 +311,7 @@ describe('connect', async () => {
 				expect(peerAsResult).to.eql(validPeer));
 		});
 
-		describe('registerRPC', async () => {
+		describe('registerRPC', () => {
 			let validRPCSocket;
 
 			before(async () => {
@@ -328,7 +328,7 @@ describe('connect', async () => {
 				peerAsResult = registerRPC(validPeer, loggerMock, masterWAMPServerMock);
 			});
 
-			describe('when wsRPC.getServer returns servers with event and rpc methods', async () => {
+			describe('when wsRPC.getServer returns servers with event and rpc methods', () => {
 				it('should return peer with rpc', async () =>
 					expect(peerAsResult)
 						.to.have.property('rpc')
@@ -344,7 +344,7 @@ describe('connect', async () => {
 						.to.have.nested.property(`rpc.${validEventProcedureName}`)
 						.to.be.a('function'));
 
-				describe('when RPC method is being called on peer and succeeds', async () => {
+				describe('when RPC method is being called on peer and succeeds', () => {
 					let validRPCArgument;
 					let validRPCCallback;
 					const validRPCResult = 'valid rpc result';
@@ -379,7 +379,7 @@ describe('connect', async () => {
 					it('should call RPC callback with error = null and result = [validRPCResult]', async () =>
 						expect(validRPCCallback).calledWith(null, validRPCResult));
 
-					describe('when RPC method is called without an argument', async () => {
+					describe('when RPC method is called without an argument', () => {
 						let originalValidRPCArgument;
 						before(async () => {
 							originalValidRPCArgument = validRPCArgument;
@@ -398,7 +398,7 @@ describe('connect', async () => {
 							expect(validRPCCallback).calledOnce);
 					});
 
-					describe('when peer.socket.call failed', async () => {
+					describe('when peer.socket.call failed', () => {
 						const validRPCError = 'valid rpc error';
 						beforeEach(beforeEachCb => {
 							validRPCCallback.resetHistory();
@@ -419,7 +419,7 @@ describe('connect', async () => {
 					});
 				});
 
-				describe('when Emit method is being called on peer', async () => {
+				describe('when Emit method is being called on peer', () => {
 					const validEmitArgument = 'valid string argument';
 					beforeEach(beforeEachCb => {
 						peerAsResult.rpc[validEventProcedureName](validEmitArgument);
@@ -438,7 +438,7 @@ describe('connect', async () => {
 			});
 		});
 
-		describe('registerSocketListeners', async () => {
+		describe('registerSocketListeners', () => {
 			let validSocket;
 			before(async () => {
 				validSocket = {

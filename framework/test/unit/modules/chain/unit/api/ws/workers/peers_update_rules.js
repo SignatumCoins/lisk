@@ -23,7 +23,7 @@ const connectionsTable = require('../../../../../../../../src/modules/chain/api/
 const PeersUpdateRules = require('../../../../../../../../src/modules/chain/api/ws/workers/peers_update_rules');
 const Rules = require('../../../../../../../../src/modules/chain/api/ws/workers/rules');
 
-describe('PeersUpdateRules', async () => {
+describe('PeersUpdateRules', () => {
 	let slaveWAMPServerMock;
 	let peersUpdateRules;
 	let validConnectionId;
@@ -51,7 +51,7 @@ describe('PeersUpdateRules', async () => {
 		connectionsTable.connectionIdToNonceMap = {};
 	});
 
-	describe('constructor', async () => {
+	describe('constructor', () => {
 		it('should have empty slaveToMasterSender object assigned', async () => {
 			expect(peersUpdateRules)
 				.to.have.property('slaveToMasterSender')
@@ -65,7 +65,7 @@ describe('PeersUpdateRules', async () => {
 		});
 	});
 
-	describe('insert', async () => {
+	describe('insert', () => {
 		it('should return an error when invoked with callback only', async () => {
 			peersUpdateRules.insert(undefined, undefined, err => {
 				expect(err).to.be.an('error');
@@ -187,7 +187,7 @@ describe('PeersUpdateRules', async () => {
 			});
 		});
 
-		describe('multiple valid entries', async () => {
+		describe('multiple valid entries', () => {
 			let validPeerA;
 			let validPeerB;
 			const validConnectionIdA = `${validConnectionId}A`;
@@ -234,7 +234,7 @@ describe('PeersUpdateRules', async () => {
 		});
 	});
 
-	describe('remove', async () => {
+	describe('remove', () => {
 		it('should return an error when invoked with callback only', async () => {
 			peersUpdateRules.remove(undefined, undefined, err => {
 				expect(err).to.be.an('error');
@@ -280,7 +280,7 @@ describe('PeersUpdateRules', async () => {
 				.to.be.true;
 		});
 
-		describe('after peer is added', async () => {
+		describe('after peer is added', () => {
 			beforeEach(async () => {
 				peersUpdateRules.insert(validPeer, validConnectionId, actionCb);
 				peersUpdateRules.slaveToMasterSender.send.restore();
@@ -365,7 +365,7 @@ describe('PeersUpdateRules', async () => {
 		});
 	});
 
-	describe('block', async () => {
+	describe('block', () => {
 		const validFailureCode = 4100;
 
 		it('should return the PeerUpdateError when called', async () => {
@@ -380,7 +380,7 @@ describe('PeersUpdateRules', async () => {
 		});
 	});
 
-	describe('internal.update', async () => {
+	describe('internal.update', () => {
 		let insertStub;
 		let removeStub;
 		let blockStub;
@@ -410,10 +410,10 @@ describe('PeersUpdateRules', async () => {
 			connectionsTable.getConnectionId.returns(presence);
 		}
 
-		describe('insert', async () => {
+		describe('insert', () => {
 			const INSERT = Rules.UPDATES.INSERT;
 
-			describe('when peer is present on master', async () => {
+			describe('when peer is present on master', () => {
 				const onMasterPresence = true;
 
 				beforeEach(async () => {
@@ -471,7 +471,7 @@ describe('PeersUpdateRules', async () => {
 				});
 			});
 
-			describe('when peer is not present on master', async () => {
+			describe('when peer is not present on master', () => {
 				const onMasterPresence = false;
 
 				beforeEach(async () => {
@@ -530,10 +530,10 @@ describe('PeersUpdateRules', async () => {
 			});
 		});
 
-		describe('remove', async () => {
+		describe('remove', () => {
 			const REMOVE = Rules.UPDATES.REMOVE;
 
-			describe('when peer is present on master', async () => {
+			describe('when peer is present on master', () => {
 				const onMasterPresence = true;
 
 				beforeEach(async () => {
@@ -591,7 +591,7 @@ describe('PeersUpdateRules', async () => {
 				});
 			});
 
-			describe('when peer is not present on master', async () => {
+			describe('when peer is not present on master', () => {
 				const onMasterPresence = false;
 
 				beforeEach(async () => {
@@ -651,7 +651,7 @@ describe('PeersUpdateRules', async () => {
 		});
 	});
 
-	describe('external.update', async () => {
+	describe('external.update', () => {
 		let minimalValidUpdateRequest;
 
 		beforeEach(async () => {
@@ -663,7 +663,7 @@ describe('PeersUpdateRules', async () => {
 			};
 		});
 
-		describe('schema', async () => {
+		describe('schema', () => {
 			it('should reject empty requests', async () => {
 				peersUpdateRules.external.update(undefined, err => {
 					expect(err).to.equal('Expected type object but found type undefined');

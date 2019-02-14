@@ -174,7 +174,7 @@ function getValidKeypairForSlot(library, slot) {
 		});
 }
 
-describe('blocks/verify', async () => {
+describe('blocks/verify', () => {
 	let library;
 	let accounts;
 	let blocksVerify;
@@ -227,7 +227,7 @@ describe('blocks/verify', async () => {
 		application.cleanup(done);
 	});
 
-	describe('__private', async () => {
+	describe('__private', () => {
 		let privateFunctions;
 		let RewiredVerify;
 
@@ -258,7 +258,7 @@ describe('blocks/verify', async () => {
 			done();
 		});
 
-		describe('verifySignature', async () => {
+		describe('verifySignature', () => {
 			it('should fail when blockSignature property is not a hex string', done => {
 				const blockSignature = validBlock.blockSignature;
 				validBlock.blockSignature = 'invalidBlockSignature';
@@ -329,7 +329,7 @@ describe('blocks/verify', async () => {
 			});
 		});
 
-		describe('verifyPreviousBlock', async () => {
+		describe('verifyPreviousBlock', () => {
 			it('should fail when previousBlock property is missing', done => {
 				const auxPreviousBlock = validBlock.previousBlock;
 				delete validBlock.previousBlock;
@@ -349,7 +349,7 @@ describe('blocks/verify', async () => {
 			});
 		});
 
-		describe('verifyVersion', async () => {
+		describe('verifyVersion', () => {
 			it('should fail when block version != 0', done => {
 				const version = validBlock.version;
 				validBlock.version = 1;
@@ -366,7 +366,7 @@ describe('blocks/verify', async () => {
 			});
 		});
 
-		describe('verifyReward', async () => {
+		describe('verifyReward', () => {
 			it('should fail when block reward = 99 instead of 0', done => {
 				validBlock.reward = 99;
 
@@ -385,7 +385,7 @@ describe('blocks/verify', async () => {
 		});
 
 		/* eslint-disable mocha/no-skipped-tests */
-		describe.skip('verifyId', async () => {
+		describe.skip('verifyId', () => {
 			it('should reset block id when block id is an invalid alpha-numeric string value', async () => {
 				const blockId = '884740302254229983';
 				validBlock.id = 'invalid-block-id';
@@ -419,7 +419,7 @@ describe('blocks/verify', async () => {
 		});
 		/* eslint-enable mocha/no-skipped-tests */
 
-		describe('verifyPayload', async () => {
+		describe('verifyPayload', () => {
 			it('should fail when payload length greater than MAX_PAYLOAD_LENGTH constant value', done => {
 				const payloadLength = validBlock.payloadLength;
 				validBlock.payloadLength = 1024 * 1024 * 2;
@@ -555,7 +555,7 @@ describe('blocks/verify', async () => {
 			});
 		});
 
-		describe('verifyForkOne', async () => {
+		describe('verifyForkOne', () => {
 			it('should fail when previousBlock value is invalid', done => {
 				validBlock.previousBlock = '10937893559311260102';
 
@@ -582,7 +582,7 @@ describe('blocks/verify', async () => {
 			});
 		});
 
-		describe('verifyBlockSlot', async () => {
+		describe('verifyBlockSlot', () => {
 			it('should fail when block timestamp < than previousBlock timestamp', done => {
 				const timestamp = validBlock.timestamp;
 				validBlock.timestamp = 32578350;
@@ -603,7 +603,7 @@ describe('blocks/verify', async () => {
 			});
 		});
 
-		describe('verifyBlockSlotWindow', async () => {
+		describe('verifyBlockSlotWindow', () => {
 			let verifyBlockSlotWindow;
 			let result;
 
@@ -621,7 +621,7 @@ describe('blocks/verify', async () => {
 				done();
 			});
 
-			describe('for current slot number', async () => {
+			describe('for current slot number', () => {
 				let dummyBlock;
 
 				before(done => {
@@ -638,7 +638,7 @@ describe('blocks/verify', async () => {
 				});
 			});
 
-			describe(`for slot number ${BLOCK_SLOT_WINDOW} slots in the past`, async () => {
+			describe(`for slot number ${BLOCK_SLOT_WINDOW} slots in the past`, () => {
 				let dummyBlock;
 
 				before(done => {
@@ -657,7 +657,7 @@ describe('blocks/verify', async () => {
 				});
 			});
 
-			describe('for slot number in the future', async () => {
+			describe('for slot number in the future', () => {
 				let dummyBlock;
 
 				before(done => {
@@ -695,7 +695,7 @@ describe('blocks/verify', async () => {
 			});
 		});
 
-		describe('onBlockchainReady', async () => {
+		describe('onBlockchainReady', () => {
 			let onBlockchainReady;
 
 			before(done => {
@@ -722,8 +722,8 @@ describe('blocks/verify', async () => {
 			});
 		});
 
-		describe('onNewBlock', async () => {
-			describe('with lastNBlockIds', async () => {
+		describe('onNewBlock', () => {
+			describe('with lastNBlockIds', () => {
 				let lastNBlockIds;
 
 				before(done => {
@@ -731,7 +731,7 @@ describe('blocks/verify', async () => {
 					done();
 				});
 
-				describe('when onNewBlock function is called once', async () => {
+				describe('when onNewBlock function is called once', () => {
 					let dummyBlock;
 
 					before(() => {
@@ -747,7 +747,7 @@ describe('blocks/verify', async () => {
 					});
 				});
 
-				describe(`when onNewBlock function is called ${BLOCK_SLOT_WINDOW}times`, async () => {
+				describe(`when onNewBlock function is called ${BLOCK_SLOT_WINDOW}times`, () => {
 					const blockIds = [];
 
 					before(() => {
@@ -808,7 +808,7 @@ describe('blocks/verify', async () => {
 			});
 		});
 
-		describe('verifyAgainstLastNBlockIds', async () => {
+		describe('verifyAgainstLastNBlockIds', () => {
 			let verifyAgainstLastNBlockIds;
 			let result = {
 				verified: true,
@@ -830,7 +830,7 @@ describe('blocks/verify', async () => {
 				done();
 			});
 
-			describe('when __private.lastNBlockIds', async () => {
+			describe('when __private.lastNBlockIds', () => {
 				let lastNBlockIds;
 
 				before(done => {
@@ -838,7 +838,7 @@ describe('blocks/verify', async () => {
 					done();
 				});
 
-				describe('contains block id', async () => {
+				describe('contains block id', () => {
 					const dummyBlockId = '123123123123';
 
 					before(() => {
@@ -852,7 +852,7 @@ describe('blocks/verify', async () => {
 					});
 				});
 
-				describe('does not contain block id', async () => {
+				describe('does not contain block id', () => {
 					it('should return result with no errors', async () => {
 						return expect(
 							verifyAgainstLastNBlockIds({ id: '1231231234' }, result).errors
@@ -864,16 +864,16 @@ describe('blocks/verify', async () => {
 	});
 
 	// TODO: Refactor this test, dataset being used is no longer valid because of BLOCK_SLOT_WINDOW check
-	describe('verifyReceipt', async () => {});
+	describe('verifyReceipt', () => {});
 
-	describe('verifyBlock', async () => {});
+	describe('verifyBlock', () => {});
 
-	describe('addBlockProperties', async () => {});
+	describe('addBlockProperties', () => {});
 
-	describe('deleteBlockProperties', async () => {});
+	describe('deleteBlockProperties', () => {});
 
 	// Sends a block to network, save it locally
-	describe('processBlock for valid block {broadcast: true, saveBlock: true}', async () => {
+	describe('processBlock for valid block {broadcast: true, saveBlock: true}', () => {
 		it('should clear database', done => {
 			async.every(
 				[
@@ -952,7 +952,7 @@ describe('blocks/verify', async () => {
 		});
 	});
 
-	describe('processBlock for invalid block {broadcast: true, saveBlock: true}', async () => {
+	describe('processBlock for invalid block {broadcast: true, saveBlock: true}', () => {
 		beforeEach(done => {
 			blocksVerify.processBlock(block1, true, true, done);
 		});
@@ -966,7 +966,7 @@ describe('blocks/verify', async () => {
 	});
 
 	// Receives a block from network, save it locally
-	describe('processBlock for invalid block {broadcast: false, saveBlock: true}', async () => {
+	describe('processBlock for invalid block {broadcast: false, saveBlock: true}', () => {
 		let invalidBlock2;
 
 		it('should generate block 2 with invalid generator slot', done => {
@@ -993,7 +993,7 @@ describe('blocks/verify', async () => {
 			done();
 		});
 
-		describe('normalizeBlock validations', async () => {
+		describe('normalizeBlock validations', () => {
 			beforeEach(done => {
 				block2 = createBlock(
 					blocks,
@@ -1066,7 +1066,7 @@ describe('blocks/verify', async () => {
 				});
 			});
 
-			describe('block with processed transaction', async () => {
+			describe('block with processed transaction', () => {
 				let auxBlock;
 
 				it('should generate block 1 with valid generator slot and processed transaction', done => {
@@ -1178,7 +1178,7 @@ describe('blocks/verify', async () => {
 		});
 	});
 
-	describe('processBlock for valid block {broadcast: false, saveBlock: true}', async () => {
+	describe('processBlock for valid block {broadcast: false, saveBlock: true}', () => {
 		it('should generate block 2 with valid generator slot', done => {
 			const slot = slots.getSlotNumber();
 			const time = slots.getSlotTime(slots.getSlotNumber());

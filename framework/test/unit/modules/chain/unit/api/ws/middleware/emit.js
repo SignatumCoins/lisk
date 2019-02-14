@@ -19,7 +19,7 @@ const randomstring = require('randomstring');
 const connectionsTable = require('../../../../../../../../src/modules/chain/api/ws/workers/connections_table');
 const emitMiddleware = require('../../../../../../../../src/modules/chain/api/ws/workers/middlewares/emit');
 
-describe('emitMiddleware', async () => {
+describe('emitMiddleware', () => {
 	let validReq;
 	let validNext;
 
@@ -31,7 +31,7 @@ describe('emitMiddleware', async () => {
 		sinonSandbox.restore();
 	});
 
-	describe('when valid req and next params provided', async () => {
+	describe('when valid req and next params provided', () => {
 		const validSocketId = 0;
 		before(async () => {
 			validReq = {
@@ -58,7 +58,7 @@ describe('emitMiddleware', async () => {
 			'postSignatures',
 		];
 		receiveDataEvents.forEach(dataEvent => {
-			describe(`when req.event is '${dataEvent}' responsible for receiving data on P2P layer `, async () => {
+			describe(`when req.event is '${dataEvent}' responsible for receiving data on P2P layer `, () => {
 				before(async () => {
 					validReq.event = dataEvent;
 				});
@@ -69,11 +69,11 @@ describe('emitMiddleware', async () => {
 				it('should call connectionsTable.getNonce with [validSocketId]', async () =>
 					expect(connectionsTable.getNonce).calledWithExactly(validSocketId));
 
-				describe('when nonce is not matched with [validSocketId] in connectionsTables', async () => {
+				describe('when nonce is not matched with [validSocketId] in connectionsTables', () => {
 					it('should add nonce = undefined property to req.data', async () =>
 						expect(validReq.data).to.have.property('nonce').to.be.undefined);
 
-					describe('when req.data = null', async () => {
+					describe('when req.data = null', () => {
 						before(async () => {
 							validReq.data = null;
 						});
@@ -86,7 +86,7 @@ describe('emitMiddleware', async () => {
 					});
 				});
 
-				describe('when nonce is matched with [validSocketId] in connectionsTables', async () => {
+				describe('when nonce is matched with [validSocketId] in connectionsTables', () => {
 					const validNonce = randomstring.generate(16);
 					before(async () => {
 						connectionsTable.getNonce.returns(validNonce);

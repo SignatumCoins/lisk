@@ -20,7 +20,7 @@ const BlocksChain = rewire(
 	'../../../../../../../src/modules/chain/modules/blocks/chain.js'
 );
 
-describe('blocks/chain', async () => {
+describe('blocks/chain', () => {
 	let __private;
 	let library;
 	let modules;
@@ -199,7 +199,7 @@ describe('blocks/chain', async () => {
 
 	afterEach(() => sinonSandbox.restore());
 
-	describe('constructor', async () => {
+	describe('constructor', () => {
 		it('should assign params to library', async () => {
 			expect(library.logger).to.eql(loggerStub);
 			expect(library.storage).to.eql(storageStub);
@@ -230,9 +230,9 @@ describe('blocks/chain', async () => {
 		});
 	});
 
-	describe('saveGenesisBlock', async () => {
+	describe('saveGenesisBlock', () => {
 		let saveBlockTemp;
-		describe('when library.storage.entities.Block.isPersisted fails', async () => {
+		describe('when library.storage.entities.Block.isPersisted fails', () => {
 			beforeEach(() =>
 				library.storage.entities.Block.isPersisted.rejects(
 					'getGenesisBlockId-ERR'
@@ -250,8 +250,8 @@ describe('blocks/chain', async () => {
 			});
 		});
 
-		describe('when library.storage.entities.Block.isPersisted succeeds', async () => {
-			describe('if returns false (genesis block is not in database)', async () => {
+		describe('when library.storage.entities.Block.isPersisted succeeds', () => {
+			describe('if returns false (genesis block is not in database)', () => {
 				beforeEach(done => {
 					library.storage.entities.Block.isPersisted.resolves(false);
 					saveBlockTemp = blocksChainModule.saveBlock;
@@ -264,7 +264,7 @@ describe('blocks/chain', async () => {
 					done();
 				});
 
-				describe('when self.saveBlock fails', async () => {
+				describe('when self.saveBlock fails', () => {
 					beforeEach(() =>
 						blocksChainModule.saveBlock.callsArgWith(1, 'saveBlock-ERR', null)
 					);
@@ -277,7 +277,7 @@ describe('blocks/chain', async () => {
 					});
 				});
 
-				describe('when self.saveBlock succeeds', async () => {
+				describe('when self.saveBlock succeeds', () => {
 					beforeEach(() =>
 						blocksChainModule.saveBlock.callsArgWith(1, null, true)
 					);
@@ -291,7 +291,7 @@ describe('blocks/chain', async () => {
 				});
 			});
 
-			describe('if returns true', async () => {
+			describe('if returns true', () => {
 				beforeEach(() =>
 					library.storage.entities.Block.isPersisted.resolves(true)
 				);
@@ -306,7 +306,7 @@ describe('blocks/chain', async () => {
 		});
 	});
 
-	describe('saveBlock', async () => {
+	describe('saveBlock', () => {
 		let afterSaveTemp;
 
 		beforeEach(done => {
@@ -319,7 +319,7 @@ describe('blocks/chain', async () => {
 			done();
 		});
 
-		describe('when tx param is passed', async () => {
+		describe('when tx param is passed', () => {
 			let txStub;
 			beforeEach(done => {
 				txStub = {
@@ -334,7 +334,7 @@ describe('blocks/chain', async () => {
 				done();
 			});
 
-			describe('when tx.batch fails', async () => {
+			describe('when tx.batch fails', () => {
 				beforeEach(() => txStub.batch.rejects('txbatch-ERR'));
 
 				it('should call a callback with error', done => {
@@ -349,7 +349,7 @@ describe('blocks/chain', async () => {
 				});
 			});
 
-			describe('when tx.batch succeeds', async () => {
+			describe('when tx.batch succeeds', () => {
 				beforeEach(done => {
 					txStub.batch.resolves();
 					__private.afterSave = sinonSandbox.stub().callsArgWith(1, null, true);
@@ -369,7 +369,7 @@ describe('blocks/chain', async () => {
 			});
 		});
 
-		describe('when tx param is not passed', async () => {
+		describe('when tx param is not passed', () => {
 			let txStub;
 
 			beforeEach(done => {
@@ -386,7 +386,7 @@ describe('blocks/chain', async () => {
 				done();
 			});
 
-			describe('when tx.batch fails', async () => {
+			describe('when tx.batch fails', () => {
 				beforeEach(() => txStub.batch.rejects('txbatch-ERR'));
 
 				it('should call a callback with error', done => {
@@ -397,7 +397,7 @@ describe('blocks/chain', async () => {
 				});
 			});
 
-			describe('when tx.batch succeeds', async () => {
+			describe('when tx.batch succeeds', () => {
 				beforeEach(done => {
 					txStub.batch.resolves();
 					__private.afterSave = sinonSandbox.stub().callsArgWith(1, null, true);
@@ -414,7 +414,7 @@ describe('blocks/chain', async () => {
 		});
 	});
 
-	describe('__private.afterSave', async () => {
+	describe('__private.afterSave', () => {
 		it('should call afterSave for all transactions', done => {
 			__private.afterSave(blockWithTransactions, async () => {
 				expect(library.logic.transaction.afterSave.callCount).to.equal(3);
@@ -423,8 +423,8 @@ describe('blocks/chain', async () => {
 		});
 	});
 
-	describe('deleteBlock', async () => {
-		describe('when library.storage.entities.Block.delete fails', async () => {
+	describe('deleteBlock', () => {
+		describe('when library.storage.entities.Block.delete fails', () => {
 			beforeEach(() =>
 				library.storage.entities.Block.delete.rejects('deleteBlock-ERR')
 			);
@@ -442,7 +442,7 @@ describe('blocks/chain', async () => {
 			});
 		});
 
-		describe('when library.storage.entities.Block.delete succeeds', async () => {
+		describe('when library.storage.entities.Block.delete succeeds', () => {
 			beforeEach(() => library.storage.entities.Block.delete.resolves(true));
 
 			it('should call a callback with no error', done => {
@@ -457,8 +457,8 @@ describe('blocks/chain', async () => {
 		});
 	});
 
-	describe('deleteFromBlockId', async () => {
-		describe('when library.storage.entities.Block.getOne fails', async () => {
+	describe('deleteFromBlockId', () => {
+		describe('when library.storage.entities.Block.getOne fails', () => {
 			beforeEach(() =>
 				library.storage.entities.Block.getOne.rejects('deleteFromBlockId-ERR')
 			);
@@ -474,7 +474,7 @@ describe('blocks/chain', async () => {
 			});
 		});
 
-		describe('when library.storage.entities.Block.delete fails', async () => {
+		describe('when library.storage.entities.Block.delete fails', () => {
 			beforeEach(() => {
 				library.storage.entities.Block.getOne.resolves({ height: 1 });
 				return library.storage.entities.Block.delete.rejects(
@@ -493,7 +493,7 @@ describe('blocks/chain', async () => {
 			});
 		});
 
-		describe('when library.storage.entities.Block.delete succeeds', async () => {
+		describe('when library.storage.entities.Block.delete succeeds', () => {
 			beforeEach(() => {
 				library.storage.entities.Block.getOne.resolves({ height: 1 });
 				return library.storage.entities.Block.delete.resolves(true);
@@ -509,7 +509,7 @@ describe('blocks/chain', async () => {
 		});
 	});
 
-	describe('applyGenesisBlock', async () => {
+	describe('applyGenesisBlock', () => {
 		let applyTransactionTemp;
 
 		beforeEach(done => {
@@ -524,7 +524,7 @@ describe('blocks/chain', async () => {
 			done();
 		});
 
-		describe('when block.transactions is empty', async () => {
+		describe('when block.transactions is empty', () => {
 			it('modules.rouds.tick should call a callback', done => {
 				blocksChainModule.applyGenesisBlock(
 					blockWithEmptyTransactions,
@@ -544,8 +544,8 @@ describe('blocks/chain', async () => {
 			});
 		});
 
-		describe('when block.transactions is not empty', async () => {
-			describe('when modules.accounts.setAccountAndGet fails', async () => {
+		describe('when block.transactions is not empty', () => {
+			describe('when modules.accounts.setAccountAndGet fails', () => {
 				beforeEach(() => {
 					process.emit = sinonSandbox.stub();
 					return modules.accounts.setAccountAndGet.callsArgWith(
@@ -570,12 +570,12 @@ describe('blocks/chain', async () => {
 				});
 			});
 
-			describe('when modules.accounts.setAccountAndGet succeeds', async () => {
+			describe('when modules.accounts.setAccountAndGet succeeds', () => {
 				beforeEach(() =>
 					modules.accounts.setAccountAndGet.callsArgWith(1, null, true)
 				);
 
-				describe('when __private.applyTransaction fails', async () => {
+				describe('when __private.applyTransaction fails', () => {
 					beforeEach(() =>
 						__private.applyTransaction.callsArgWith(
 							3,
@@ -598,7 +598,7 @@ describe('blocks/chain', async () => {
 					});
 				});
 
-				describe('when __private.applyTransaction succeeds', async () => {
+				describe('when __private.applyTransaction succeeds', () => {
 					beforeEach(() =>
 						__private.applyTransaction.callsArgWith(3, null, true)
 					);
@@ -626,8 +626,8 @@ describe('blocks/chain', async () => {
 		});
 	});
 
-	describe('__private.applyTransaction', async () => {
-		describe('when modules.transactions.applyUnconfirmed fails', async () => {
+	describe('__private.applyTransaction', () => {
+		describe('when modules.transactions.applyUnconfirmed fails', () => {
 			beforeEach(() =>
 				modules.transactions.applyUnconfirmed.callsArgWith(
 					2,
@@ -651,12 +651,12 @@ describe('blocks/chain', async () => {
 			});
 		});
 
-		describe('when modules.transactions.applyUnconfirmed succeeds', async () => {
+		describe('when modules.transactions.applyUnconfirmed succeeds', () => {
 			beforeEach(() =>
 				modules.transactions.applyUnconfirmed.callsArgWith(2, null, true)
 			);
 
-			describe('when modules.transactions.applyConfirmed fails', async () => {
+			describe('when modules.transactions.applyConfirmed fails', () => {
 				beforeEach(() =>
 					modules.transactions.applyConfirmed.callsArgWith(3, 'apply-ERR', null)
 				);
@@ -678,7 +678,7 @@ describe('blocks/chain', async () => {
 				});
 			});
 
-			describe('when modules.transactions.applyConfirmed succeeds', async () => {
+			describe('when modules.transactions.applyConfirmed succeeds', () => {
 				beforeEach(() =>
 					modules.transactions.applyConfirmed.callsArgWith(3, null, true)
 				);
@@ -700,8 +700,8 @@ describe('blocks/chain', async () => {
 		});
 	});
 
-	describe('__private.undoUnconfirmedListStep', async () => {
-		describe('when modules.transactions.undoUnconfirmedList fails', async () => {
+	describe('__private.undoUnconfirmedListStep', () => {
+		describe('when modules.transactions.undoUnconfirmedList fails', () => {
 			beforeEach(() =>
 				modules.transactions.undoUnconfirmedList.callsArgWith(
 					0,
@@ -724,7 +724,7 @@ describe('blocks/chain', async () => {
 			});
 		});
 
-		describe('when modules.transactions.undoUnconfirmedList succeeds', async () => {
+		describe('when modules.transactions.undoUnconfirmedList succeeds', () => {
 			beforeEach(() =>
 				modules.transactions.undoUnconfirmedList.callsArgWith(0, null, true)
 			);
@@ -737,8 +737,8 @@ describe('blocks/chain', async () => {
 		});
 	});
 
-	describe('__private.applyUnconfirmedStep', async () => {
-		describe('when block.transactions is undefined', async () => {
+	describe('__private.applyUnconfirmedStep', () => {
+		describe('when block.transactions is undefined', () => {
 			it('should return rejected promise with error', done => {
 				__private
 					.applyUnconfirmedStep(
@@ -755,7 +755,7 @@ describe('blocks/chain', async () => {
 			});
 		});
 
-		describe('when block.transactions is empty', async () => {
+		describe('when block.transactions is empty', () => {
 			it('should return resolved promise with no error', done => {
 				__private
 					.applyUnconfirmedStep(
@@ -769,8 +769,8 @@ describe('blocks/chain', async () => {
 			});
 		});
 
-		describe('when block.transactions is not empty', async () => {
-			describe('when modules.accounts.setAccountAndGet fails', async () => {
+		describe('when block.transactions is not empty', () => {
+			describe('when modules.accounts.setAccountAndGet fails', () => {
 				beforeEach(() =>
 					modules.accounts.setAccountAndGet.callsArgWith(
 						1,
@@ -801,12 +801,12 @@ describe('blocks/chain', async () => {
 				});
 			});
 
-			describe('when modules.accounts.setAccountAndGet succeeds', async () => {
+			describe('when modules.accounts.setAccountAndGet succeeds', () => {
 				beforeEach(() =>
 					modules.accounts.setAccountAndGet.callsArgWith(1, null, 'sender1')
 				);
 
-				describe('when modules.transactions.applyUnconfirmed fails', async () => {
+				describe('when modules.transactions.applyUnconfirmed fails', () => {
 					beforeEach(() =>
 						modules.transactions.applyUnconfirmed.callsArgWith(
 							2,
@@ -837,7 +837,7 @@ describe('blocks/chain', async () => {
 					});
 				});
 
-				describe('when modules.transactions.applyUnconfirmed succeeds', async () => {
+				describe('when modules.transactions.applyUnconfirmed succeeds', () => {
 					beforeEach(() =>
 						modules.transactions.applyUnconfirmed.callsArgWith(2, null, true)
 					);
@@ -866,8 +866,8 @@ describe('blocks/chain', async () => {
 		});
 	});
 
-	describe('__private.applyConfirmedStep', async () => {
-		describe('when block transaction is undefined', async () => {
+	describe('__private.applyConfirmedStep', () => {
+		describe('when block transaction is undefined', () => {
 			it('should return rejected promise with error', done => {
 				__private
 					.applyConfirmedStep(
@@ -884,7 +884,7 @@ describe('blocks/chain', async () => {
 			});
 		});
 
-		describe('when block transaction is empty', async () => {
+		describe('when block transaction is empty', () => {
 			it('should return resolved promise with no error', done => {
 				__private
 					.applyConfirmedStep(
@@ -898,8 +898,8 @@ describe('blocks/chain', async () => {
 			});
 		});
 
-		describe('when block.transaction is not empty', async () => {
-			describe('when modules.accounts.getAccount fails', async () => {
+		describe('when block.transaction is not empty', () => {
+			describe('when modules.accounts.getAccount fails', () => {
 				beforeEach(() =>
 					modules.accounts.getAccount.callsArgWith(1, 'getAccount-ERR', null)
 				);
@@ -929,12 +929,12 @@ describe('blocks/chain', async () => {
 				});
 			});
 
-			describe('when modules.accounts.getAccount succeeds', async () => {
+			describe('when modules.accounts.getAccount succeeds', () => {
 				beforeEach(() =>
 					modules.accounts.getAccount.callsArgWith(1, null, 'sender1')
 				);
 
-				describe('when library.logic.transaction.apply fails', async () => {
+				describe('when library.logic.transaction.apply fails', () => {
 					beforeEach(() =>
 						modules.transactions.applyConfirmed.callsArgWith(
 							3,
@@ -970,7 +970,7 @@ describe('blocks/chain', async () => {
 					});
 				});
 
-				describe('when library.logic.transaction.applyConfirmed succeeds', async () => {
+				describe('when library.logic.transaction.applyConfirmed succeeds', () => {
 					beforeEach(() =>
 						modules.transactions.applyConfirmed.callsArgWith(3, null, true)
 					);
@@ -994,7 +994,7 @@ describe('blocks/chain', async () => {
 		});
 	});
 
-	describe('__private.saveBlockStep', async () => {
+	describe('__private.saveBlockStep', () => {
 		let saveBlockTemp;
 
 		beforeEach(done => {
@@ -1013,8 +1013,8 @@ describe('blocks/chain', async () => {
 			done();
 		});
 
-		describe('when saveBlock is true', async () => {
-			describe('when self.saveBlock fails', async () => {
+		describe('when saveBlock is true', () => {
+			describe('when self.saveBlock fails', () => {
 				beforeEach(() =>
 					blocksChainModule.saveBlock.callsArgWith(1, 'saveBlock-ERR', null)
 				);
@@ -1046,7 +1046,7 @@ describe('blocks/chain', async () => {
 				});
 			});
 
-			describe('when self.saveBlock succeeds', async () => {
+			describe('when self.saveBlock succeeds', () => {
 				beforeEach(() =>
 					blocksChainModule.saveBlock.callsArgWith(1, null, true)
 				);
@@ -1060,7 +1060,7 @@ describe('blocks/chain', async () => {
 					);
 				});
 
-				describe('when modules.rounds.tick fails', async () => {
+				describe('when modules.rounds.tick fails', () => {
 					beforeEach(() =>
 						modules.rounds.tick.callsArgWith(1, 'tick-ERR', null)
 					);
@@ -1080,7 +1080,7 @@ describe('blocks/chain', async () => {
 					});
 				});
 
-				describe('when modules.rounds.tick succeeds', async () => {
+				describe('when modules.rounds.tick succeeds', () => {
 					beforeEach(() => modules.rounds.tick.callsArgWith(1, null, true));
 
 					it('should call a callback with no error', done => {
@@ -1106,8 +1106,8 @@ describe('blocks/chain', async () => {
 			});
 		});
 
-		describe('when saveBlock is false', async () => {
-			describe('when modules.rounds.tick fails', async () => {
+		describe('when saveBlock is false', () => {
+			describe('when modules.rounds.tick fails', () => {
 				beforeEach(() => modules.rounds.tick.callsArgWith(1, 'tick-ERR', null));
 
 				it('should call a callback with error', done => {
@@ -1125,7 +1125,7 @@ describe('blocks/chain', async () => {
 				});
 			});
 
-			describe('when modules.rounds.tick succeeds', async () => {
+			describe('when modules.rounds.tick succeeds', () => {
 				beforeEach(() => modules.rounds.tick.callsArgWith(1, null, true));
 
 				it('should call a callback with no error', done => {
@@ -1149,7 +1149,7 @@ describe('blocks/chain', async () => {
 		});
 	});
 
-	describe('applyBlock', async () => {
+	describe('applyBlock', () => {
 		let privateTemp;
 		let txTemp;
 
@@ -1190,13 +1190,13 @@ describe('blocks/chain', async () => {
 			done();
 		});
 
-		describe('when storageStub.entities.Block.begin fails', async () => {
+		describe('when storageStub.entities.Block.begin fails', () => {
 			afterEach(() => {
 				expect(modules.blocks.isActive.set.args[0][0]).to.be.true;
 				return expect(modules.blocks.isActive.set.args[1][0]).to.be.false;
 			});
 
-			describe('when reason === Snapshot finished', async () => {
+			describe('when reason === Snapshot finished', () => {
 				beforeEach(done => {
 					storageStub.entities.Block.begin = (desc, tx) => tx(txTemp.rejects());
 					__private.saveBlockStep.rejects('Snapshot finished');
@@ -1215,7 +1215,7 @@ describe('blocks/chain', async () => {
 				});
 			});
 
-			describe('when reason !== Snapshot finished', async () => {
+			describe('when reason !== Snapshot finished', () => {
 				beforeEach(done => {
 					storageStub.entities.Block.begin = (desc, tx) => tx(txTemp.rejects());
 					__private.saveBlockStep.rejects('Chain:applyBlock-ERR');
@@ -1232,7 +1232,7 @@ describe('blocks/chain', async () => {
 			});
 		});
 
-		describe('when storageStub.entities.Block.begin succeeds', async () => {
+		describe('when storageStub.entities.Block.begin succeeds', () => {
 			beforeEach(done => {
 				storageStub.entities.Block.begin = (desc, tx) => tx(txTemp.resolves());
 				modules.transactions.removeUnconfirmedTransaction.returns(true);
@@ -1251,7 +1251,7 @@ describe('blocks/chain', async () => {
 		});
 	});
 
-	describe('broadcastReducedBlock', async () => {
+	describe('broadcastReducedBlock', () => {
 		it('should call library.bus.message with reducedBlock and broadcast', async () => {
 			blocksChainModule.broadcastReducedBlock(blockReduced, true);
 			expect(library.bus.message.calledOnce).to.be.true;
@@ -1261,7 +1261,7 @@ describe('blocks/chain', async () => {
 		});
 	});
 
-	describe('__private.loadSecondLastBlockStep', async () => {
+	describe('__private.loadSecondLastBlockStep', () => {
 		let tx;
 		beforeEach(() => {
 			tx = sinonSandbox.stub();
@@ -1272,8 +1272,8 @@ describe('blocks/chain', async () => {
 			);
 		});
 
-		describe('when modules.blocks.utils.loadBlocksPart fails', async () => {
-			describe('if returns error', async () => {
+		describe('when modules.blocks.utils.loadBlocksPart fails', () => {
+			describe('if returns error', () => {
 				it('should call a callback with returned error', done => {
 					__private.loadSecondLastBlockStep(blockReduced.id, tx).catch(err => {
 						expect(err).to.equal('loadBlocksPart-ERR');
@@ -1282,7 +1282,7 @@ describe('blocks/chain', async () => {
 				});
 			});
 
-			describe('if returns empty', async () => {
+			describe('if returns empty', () => {
 				beforeEach(() =>
 					modules.blocks.utils.loadBlocksPart.callsArgWith(1, null, [])
 				);
@@ -1296,7 +1296,7 @@ describe('blocks/chain', async () => {
 			});
 		});
 
-		describe('when modules.blocks.utils.loadBlocksPart succeeds', async () => {
+		describe('when modules.blocks.utils.loadBlocksPart succeeds', () => {
 			beforeEach(() =>
 				modules.blocks.utils.loadBlocksPart.callsArgWith(1, null, [
 					{ id: 2, height: 2 },
@@ -1305,10 +1305,10 @@ describe('blocks/chain', async () => {
 		});
 	});
 
-	describe('__private.undoConfirmedStep', async () => {
+	describe('__private.undoConfirmedStep', () => {
 		let tx;
-		describe('when oldLastBlock.transactions is not empty', async () => {
-			describe('when modules.accounts.getAccount fails', async () => {
+		describe('when oldLastBlock.transactions is not empty', () => {
+			describe('when modules.accounts.getAccount fails', () => {
 				beforeEach(() =>
 					modules.accounts.getAccount.callsArgWith(1, 'getAccount-ERR', null)
 				);
@@ -1327,7 +1327,7 @@ describe('blocks/chain', async () => {
 				});
 			});
 
-			describe('when modules.accounts.getAccount succeeds', async () => {
+			describe('when modules.accounts.getAccount succeeds', () => {
 				beforeEach(done => {
 					modules.accounts.getAccount.callsArgWith(1, null, '12ab');
 					modules.transactions.undoConfirmed.callsArgWith(3, null, true);
@@ -1376,10 +1376,10 @@ describe('blocks/chain', async () => {
 		});
 	});
 
-	describe('__private.undoUnconfirmStep', async () => {
+	describe('__private.undoUnconfirmStep', () => {
 		let tx;
-		describe('when oldLastBlock.transactions is not empty', async () => {
-			describe('when modules.transactions.undoUnconfirmed fails', async () => {
+		describe('when oldLastBlock.transactions is not empty', () => {
+			describe('when modules.transactions.undoUnconfirmed fails', () => {
 				beforeEach(done => {
 					modules.transactions.undoUnconfirmed.callsArgWith(
 						1,
@@ -1403,7 +1403,7 @@ describe('blocks/chain', async () => {
 				});
 			});
 
-			describe('when modules.transactions.undoUnconfirmed succeeds', async () => {
+			describe('when modules.transactions.undoUnconfirmed succeeds', () => {
 				beforeEach(done => {
 					modules.transactions.undoUnconfirmed.callsArgWith(1, null, true);
 					done();
@@ -1440,9 +1440,9 @@ describe('blocks/chain', async () => {
 		});
 	});
 
-	describe('__private.backwardTickStep', async () => {
+	describe('__private.backwardTickStep', () => {
 		let tx;
-		describe('when modules.rounds.backwardTick fails', async () => {
+		describe('when modules.rounds.backwardTick fails', () => {
 			beforeEach(() =>
 				modules.rounds.backwardTick.callsArgWith(2, 'backwardTick-ERR', null)
 			);
@@ -1461,7 +1461,7 @@ describe('blocks/chain', async () => {
 			});
 		});
 
-		describe('when modules.rounds.backwardTick succeeds', async () => {
+		describe('when modules.rounds.backwardTick succeeds', () => {
 			beforeEach(done => {
 				modules.rounds.backwardTick.callsArgWith(2, null);
 				done();
@@ -1476,7 +1476,7 @@ describe('blocks/chain', async () => {
 		});
 	});
 
-	describe('__private.deleteBlockStep', async () => {
+	describe('__private.deleteBlockStep', () => {
 		let deleteBlockTemp;
 		let tx;
 		beforeEach(done => {
@@ -1490,7 +1490,7 @@ describe('blocks/chain', async () => {
 			done();
 		});
 
-		describe('when self.deleteBlock fails', async () => {
+		describe('when self.deleteBlock fails', () => {
 			beforeEach(() =>
 				blocksChainModule.deleteBlock.callsArgWith(1, 'deleteBlock-ERR', null)
 			);
@@ -1503,7 +1503,7 @@ describe('blocks/chain', async () => {
 			});
 		});
 
-		describe('when self.deleteBlock succeeds', async () => {
+		describe('when self.deleteBlock succeeds', () => {
 			beforeEach(() =>
 				blocksChainModule.deleteBlock.callsArgWith(1, null, true)
 			);
@@ -1514,8 +1514,8 @@ describe('blocks/chain', async () => {
 		});
 	});
 
-	describe('__private.popLastBlock', async () => {
-		describe('when storageStub.entities.Block.begin fails', async () => {
+	describe('__private.popLastBlock', () => {
+		describe('when storageStub.entities.Block.begin fails', () => {
 			beforeEach(done => {
 				storageStub.entities.Block.begin.rejects('db-tx_ERR');
 				done();
@@ -1529,7 +1529,7 @@ describe('blocks/chain', async () => {
 			});
 		});
 
-		describe('when storageStub.entities.Block.begin passes', async () => {
+		describe('when storageStub.entities.Block.begin passes', () => {
 			beforeEach(done => {
 				storageStub.entities.Block.begin.resolves('savedBlock');
 				done();
@@ -1544,7 +1544,7 @@ describe('blocks/chain', async () => {
 		});
 	});
 
-	describe('deleteLastBlock', async () => {
+	describe('deleteLastBlock', () => {
 		let popLastBlockTemp;
 
 		beforeEach(done => {
@@ -1562,7 +1562,7 @@ describe('blocks/chain', async () => {
 			done();
 		});
 
-		describe('when lastBlock.height = 1', async () => {
+		describe('when lastBlock.height = 1', () => {
 			beforeEach(() =>
 				modules.blocks.lastBlock.get.returns(genesisBlockWithTransactions)
 			);
@@ -1578,13 +1578,13 @@ describe('blocks/chain', async () => {
 			});
 		});
 
-		describe('when lastBlock.height != 1', async () => {
+		describe('when lastBlock.height != 1', () => {
 			beforeEach(() => {
 				modules.blocks.lastBlock.set.returns(blockWithTransactions);
 				return modules.blocks.lastBlock.get.returns(blockWithTransactions);
 			});
 
-			describe('when __private.popLastBlock fails', async () => {
+			describe('when __private.popLastBlock fails', () => {
 				beforeEach(() =>
 					__private.popLastBlock.callsArgWith(1, 'popLastBlock-ERR', true)
 				);
@@ -1603,12 +1603,12 @@ describe('blocks/chain', async () => {
 				});
 			});
 
-			describe('when __private.popLastBlock succeeds', async () => {
+			describe('when __private.popLastBlock succeeds', () => {
 				beforeEach(() =>
 					__private.popLastBlock.callsArgWith(1, null, blockWithTransactions)
 				);
 
-				describe('when modules.transactions.receiveTransactions fails', async () => {
+				describe('when modules.transactions.receiveTransactions fails', () => {
 					beforeEach(() =>
 						modules.transactions.receiveTransactions.callsArgWith(
 							2,
@@ -1635,7 +1635,7 @@ describe('blocks/chain', async () => {
 					});
 				});
 
-				describe('when modules.transactions.receiveTransactions succeeds', async () => {
+				describe('when modules.transactions.receiveTransactions succeeds', () => {
 					beforeEach(() =>
 						modules.transactions.receiveTransactions.callsArgWith(2, null, true)
 					);
@@ -1655,7 +1655,7 @@ describe('blocks/chain', async () => {
 		});
 	});
 
-	describe('recoverChain', async () => {
+	describe('recoverChain', () => {
 		let deleteLastBlockTemp;
 
 		beforeEach(done => {
@@ -1671,7 +1671,7 @@ describe('blocks/chain', async () => {
 			done();
 		});
 
-		describe('when self.deleteLastBlock fails', async () => {
+		describe('when self.deleteLastBlock fails', () => {
 			beforeEach(done => {
 				blocksChainModule.deleteLastBlock = sinonSandbox
 					.stub()
@@ -1688,7 +1688,7 @@ describe('blocks/chain', async () => {
 			});
 		});
 
-		describe('when self.deleteLastBlock succeeds', async () => {
+		describe('when self.deleteLastBlock succeeds', () => {
 			beforeEach(done => {
 				blocksChainModule.deleteLastBlock = sinonSandbox
 					.stub()
@@ -1709,7 +1709,7 @@ describe('blocks/chain', async () => {
 		});
 	});
 
-	describe('onBind', async () => {
+	describe('onBind', () => {
 		beforeEach(done => {
 			loggerStub.trace.resetHistory();
 			__private.loaded = false;

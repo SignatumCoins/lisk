@@ -30,7 +30,7 @@ let errorMessage;
 let errorDesc;
 let result;
 
-describe('failure_codes', async () => {
+describe('failure_codes', () => {
 	beforeEach(async () => {
 		errorCode = 1234;
 		errorMessage = 'Peer failed...';
@@ -46,8 +46,8 @@ describe('failure_codes', async () => {
 		sinonSandbox.restore();
 	});
 
-	describe('PeerUpdateError', async () => {
-		describe('constructor', async () => {
+	describe('PeerUpdateError', () => {
+		describe('constructor', () => {
 			beforeEach(async () => {
 				peerUpdateErrorInstance = new PeerUpdateError(
 					errorCode,
@@ -75,7 +75,7 @@ describe('failure_codes', async () => {
 					.which.equals(errorDesc));
 		});
 
-		describe('toString', async () => {
+		describe('toString', () => {
 			beforeEach(async () => {
 				result = peerUpdateErrorInstance.toString();
 			});

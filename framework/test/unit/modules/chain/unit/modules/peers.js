@@ -31,7 +31,7 @@ const swagerHelper = require('../../../../../../src/modules/chain/helpers/swagge
 
 const { MAX_PEERS } = __testContext.config.constants;
 
-describe('peers', async () => {
+describe('peers', () => {
 	let storageMock;
 	let peers;
 	let PeersRewired;
@@ -101,7 +101,7 @@ describe('peers', async () => {
 		}, _.assign({}, modulesLoader.scope, { logic: { peers: peersLogicMock }, storage: storageMock }));
 	});
 
-	describe('list', async () => {
+	describe('list', () => {
 		let listResult;
 		let validOptions;
 		let randomPeers;
@@ -125,7 +125,7 @@ describe('peers', async () => {
 			});
 		});
 
-		describe('when logic.peers.list returns no records', async () => {
+		describe('when logic.peers.list returns no records', () => {
 			before(done => {
 				systemComponentMock.getBroadhash = sinonSandbox.stub().returns();
 				peersLogicMock.list = sinonSandbox.stub().returns([]);
@@ -136,7 +136,7 @@ describe('peers', async () => {
 				expect(listResult).to.be.an('array').and.to.be.empty);
 		});
 
-		describe('when logic.peers.list returns 1000 random connected peers', async () => {
+		describe('when logic.peers.list returns 1000 random connected peers', () => {
 			before(done => {
 				randomPeers = _.range(1000).map(() => generateRandomActivePeer());
 				peersLogicMock.list = sinonSandbox.stub().returns(randomPeers);
@@ -148,8 +148,8 @@ describe('peers', async () => {
 					.be.an('array')
 					.and.have.lengthOf(100));
 
-			describe('options.limit', async () => {
-				describe('when options.limit < 1000', async () => {
+			describe('options.limit', () => {
+				describe('when options.limit < 1000', () => {
 					let validLimit;
 
 					before(done => {
@@ -166,7 +166,7 @@ describe('peers', async () => {
 							.and.have.lengthOf(validLimit));
 				});
 
-				describe('when no options.limit passed', async () => {
+				describe('when no options.limit passed', () => {
 					it('should return [MAX_PEERS] results', async () =>
 						expect(listResult)
 							.be.an('array')
@@ -174,8 +174,8 @@ describe('peers', async () => {
 				});
 			});
 
-			describe('options.broadhash', async () => {
-				describe('when 250 peers matching and 750 not matching broadhash', async () => {
+			describe('options.broadhash', () => {
+				describe('when 250 peers matching and 750 not matching broadhash', () => {
 					let validBroadhash;
 					let validLimit;
 
@@ -196,7 +196,7 @@ describe('peers', async () => {
 						return delete validOptions.limit;
 					});
 
-					describe('when options.limit = 100', async () => {
+					describe('when options.limit = 100', () => {
 						before(done => {
 							validLimit = 100;
 							validOptions.limit = validLimit;
@@ -216,7 +216,7 @@ describe('peers', async () => {
 								.and.have.lengthOf(100));
 					});
 
-					describe('when options.limit = 500', async () => {
+					describe('when options.limit = 500', () => {
 						before(done => {
 							validLimit = 500;
 							validOptions.limit = validLimit;
@@ -242,10 +242,10 @@ describe('peers', async () => {
 								.be.an('array')
 								.and.have.lengthOf(250));
 
-						describe('options.attempt', async () => {
+						describe('options.attempt', () => {
 							after(async () => delete validOptions.attempt);
 
-							describe('when options.attempt = 0', async () => {
+							describe('when options.attempt = 0', () => {
 								before(done => {
 									validOptions.attempt = 0;
 									done();
@@ -260,7 +260,7 @@ describe('peers', async () => {
 									}));
 							});
 
-							describe('when options.attempt = 1', async () => {
+							describe('when options.attempt = 1', () => {
 								before(done => {
 									validOptions.attempt = 1;
 									done();
@@ -278,7 +278,7 @@ describe('peers', async () => {
 					});
 				});
 
-				describe('when no options.limit passed', async () => {
+				describe('when no options.limit passed', () => {
 					it('should return [MAX_PEERS] results', async () =>
 						expect(listResult)
 							.be.an('array')
@@ -287,8 +287,8 @@ describe('peers', async () => {
 			});
 		});
 
-		describe('when logic.peers.list returns 1000 random state peers and limit = 1000', async () => {
-			describe('options.allowedStates', async () => {
+		describe('when logic.peers.list returns 1000 random state peers and limit = 1000', () => {
+			describe('options.allowedStates', () => {
 				const CONNECTED_STATE = 2;
 				const BANNED_STATE = 1;
 				const DISCONNECTED_STATE = 0;
@@ -313,7 +313,7 @@ describe('peers', async () => {
 					return expect(listResult[0].state).equal(CONNECTED_STATE);
 				});
 
-				describe('when options.allowedStates = [1]', async () => {
+				describe('when options.allowedStates = [1]', () => {
 					before(done => {
 						validOptions.allowedStates = [1];
 						done();
@@ -329,7 +329,7 @@ describe('peers', async () => {
 					});
 				});
 
-				describe('when options.allowedStates = [0]', async () => {
+				describe('when options.allowedStates = [0]', () => {
 					before(done => {
 						validOptions.allowedStates = [0];
 						done();
@@ -345,7 +345,7 @@ describe('peers', async () => {
 					});
 				});
 
-				describe('when options.allowedStates = [0, 1]', async () => {
+				describe('when options.allowedStates = [0, 1]', () => {
 					before(done => {
 						validOptions.allowedStates = [0, 1];
 						done();
@@ -365,7 +365,7 @@ describe('peers', async () => {
 			});
 		});
 
-		describe('networkHeight', async () => {
+		describe('networkHeight', () => {
 			it('should return networkHeight 0 when no peers available', done => {
 				peersLogicMock.list = sinonSandbox.stub().returns([]);
 				peers.networkHeight(validOptions, (err, networkHeight) => {
@@ -403,7 +403,7 @@ describe('peers', async () => {
 		});
 	});
 
-	describe('update', async () => {
+	describe('update', () => {
 		let validPeer;
 		let updateResult;
 		let validUpsertResult;
@@ -430,7 +430,7 @@ describe('peers', async () => {
 			expect(updateResult).equal(validUpsertResult));
 	});
 
-	describe('remove', async () => {
+	describe('remove', () => {
 		let validPeer;
 		let removeResult;
 		let validLogicRemoveResult;
@@ -449,7 +449,7 @@ describe('peers', async () => {
 			done();
 		});
 
-		describe('when removable peer is frozen', async () => {
+		describe('when removable peer is frozen', () => {
 			let originalFrozenPeersList;
 			let loggerDebugSpy;
 
@@ -486,7 +486,7 @@ describe('peers', async () => {
 				));
 		});
 
-		describe('when removable peer is not frozen', async () => {
+		describe('when removable peer is not frozen', () => {
 			it('should call logic.peers.remove', async () =>
 				expect(peersLogicMock.remove.calledOnce).to.be.true);
 
@@ -509,14 +509,14 @@ describe('peers', async () => {
 		});
 	});
 
-	describe('getLastConsensus', async () => {
+	describe('getLastConsensus', () => {
 		it('should return self.consensus value', async () =>
 			expect(peers.getLastConsensus()).equal(
 				PeersRewired.__get__('self.consensus')
 			));
 	});
 
-	describe('calculateConsensus', async () => {
+	describe('calculateConsensus', () => {
 		let validActive;
 		let validMatched;
 		let calculateConsensusResult;
@@ -544,7 +544,7 @@ describe('peers', async () => {
 				calculateConsensusResult
 			));
 
-		describe('when active peers not passed', async () => {
+		describe('when active peers not passed', () => {
 			it('should call logic.peers.list', async () =>
 				expect(peersLogicMock.list.called).to.be.true);
 
@@ -554,7 +554,7 @@ describe('peers', async () => {
 			it('should return consensus as a number', async () =>
 				expect(calculateConsensusResult).to.be.a('number'));
 
-			describe('when CONNECTED peers exists with matching broadhash', async () => {
+			describe('when CONNECTED peers exists with matching broadhash', () => {
 				before(done => {
 					const connectedPeer = _.assign({}, prefixedPeer);
 					connectedPeer.state = Peer.STATE.CONNECTED;
@@ -567,7 +567,7 @@ describe('peers', async () => {
 					expect(calculateConsensusResult).to.equal(100));
 			});
 
-			describe('when BANNED peers exists with matching broadhash', async () => {
+			describe('when BANNED peers exists with matching broadhash', () => {
 				before(done => {
 					const bannedPeer = _.assign({}, prefixedPeer);
 					bannedPeer.state = Peer.STATE.BANNED;
@@ -580,7 +580,7 @@ describe('peers', async () => {
 					expect(calculateConsensusResult).to.equal(0));
 			});
 
-			describe('when DISCONNECTED peers exists with matching broadhash', async () => {
+			describe('when DISCONNECTED peers exists with matching broadhash', () => {
 				before(done => {
 					const disconnectedPeer = _.assign({}, prefixedPeer);
 					disconnectedPeer.state = Peer.STATE.DISCONNECTED;
@@ -594,7 +594,7 @@ describe('peers', async () => {
 			});
 		});
 
-		describe('when matched peers not passed and there are 100 active peers', async () => {
+		describe('when matched peers not passed and there are 100 active peers', () => {
 			let oneHundredActivePeers;
 			let broadhashes;
 
@@ -615,7 +615,7 @@ describe('peers', async () => {
 				done();
 			});
 
-			describe('when non of active peers matches broadhash', async () => {
+			describe('when non of active peers matches broadhash', () => {
 				before(() =>
 					oneHundredActivePeers.forEach((peer, index) => {
 						peer.broadhash = broadhashes.unmatchedBroadhashes[index];
@@ -626,7 +626,7 @@ describe('peers', async () => {
 					expect(calculateConsensusResult).to.equal(0));
 			});
 
-			describe('when all of active peers matches broadhash', async () => {
+			describe('when all of active peers matches broadhash', () => {
 				before(() =>
 					oneHundredActivePeers.forEach(peer => {
 						peer.broadhash = broadhashes.matchedBroadhash;
@@ -637,7 +637,7 @@ describe('peers', async () => {
 					expect(calculateConsensusResult).equal(100));
 			});
 
-			describe('when half of active peers matches broadhash', async () => {
+			describe('when half of active peers matches broadhash', () => {
 				before(() =>
 					oneHundredActivePeers.forEach((peer, i) => {
 						peer.broadhash =
@@ -652,8 +652,8 @@ describe('peers', async () => {
 			});
 		});
 
-		describe('when called with active and matched arguments', async () => {
-			describe('when there are 10 active and 10 matched peers', async () => {
+		describe('when called with active and matched arguments', () => {
+			describe('when there are 10 active and 10 matched peers', () => {
 				before(done => {
 					validActive = _.range(10).map(generateRandomActivePeer);
 					validMatched = _.range(10).map(generateRandomActivePeer);
@@ -664,7 +664,7 @@ describe('peers', async () => {
 					expect(calculateConsensusResult).equal(100));
 			});
 
-			describe('when there are [MAX_PEERS] active and [MAX_PEERS] matched peers', async () => {
+			describe('when there are [MAX_PEERS] active and [MAX_PEERS] matched peers', () => {
 				before(done => {
 					validActive = _.range(MAX_PEERS).map(generateRandomActivePeer);
 					validMatched = _.range(MAX_PEERS).map(generateRandomActivePeer);
@@ -675,7 +675,7 @@ describe('peers', async () => {
 					expect(calculateConsensusResult).equal(100));
 			});
 
-			describe('when there are [MAX_PEERS] x 10 active and [MAX_PEERS] matched peers', async () => {
+			describe('when there are [MAX_PEERS] x 10 active and [MAX_PEERS] matched peers', () => {
 				before(done => {
 					validActive = _.range(10 * MAX_PEERS).map(generateRandomActivePeer);
 					validMatched = _.range(MAX_PEERS).map(generateRandomActivePeer);
@@ -686,7 +686,7 @@ describe('peers', async () => {
 					expect(calculateConsensusResult).equal(100));
 			});
 
-			describe('when there are [MAX_PEERS] active and [MAX_PEERS] x 10 matched peers', async () => {
+			describe('when there are [MAX_PEERS] active and [MAX_PEERS] x 10 matched peers', () => {
 				before(done => {
 					validActive = _.range(MAX_PEERS).map(generateRandomActivePeer);
 					validMatched = _.range(10 * MAX_PEERS).map(generateRandomActivePeer);
@@ -697,7 +697,7 @@ describe('peers', async () => {
 					expect(calculateConsensusResult).equal(100));
 			});
 
-			describe('when there are 50 active and 100 matched peers', async () => {
+			describe('when there are 50 active and 100 matched peers', () => {
 				before(done => {
 					validActive = _.range(50).map(generateRandomActivePeer);
 					validMatched = _.range(100).map(generateRandomActivePeer);
@@ -708,7 +708,7 @@ describe('peers', async () => {
 					expect(calculateConsensusResult).equal(100));
 			});
 
-			describe('when there are 100 active and 50 matched peers', async () => {
+			describe('when there are 100 active and 50 matched peers', () => {
 				before(done => {
 					validActive = _.range(100).map(generateRandomActivePeer);
 					validMatched = _.range(50).map(generateRandomActivePeer);
@@ -721,7 +721,7 @@ describe('peers', async () => {
 		});
 	});
 
-	describe('acceptable', async () => {
+	describe('acceptable', () => {
 		before(done => {
 			systemComponentMock.headers.nonce = NONCE;
 			process.env.NODE_ENV = 'DEV';
@@ -764,7 +764,7 @@ describe('peers', async () => {
 		});
 	});
 
-	describe('onBlockchainReady', async () => {
+	describe('onBlockchainReady', () => {
 		let originalPeersList;
 
 		beforeEach(done => {
@@ -781,8 +781,8 @@ describe('peers', async () => {
 			done();
 		});
 
-		describe('insertSeeds', async () => {
-			describe('when library.config.peers.list contains seed peers', async () => {
+		describe('insertSeeds', () => {
+			describe('when library.config.peers.list contains seed peers', () => {
 				let seedPeersList;
 
 				beforeEach(done => {
@@ -810,8 +810,8 @@ describe('peers', async () => {
 			});
 		});
 
-		describe('importFromDatabase', async () => {
-			describe('when library.storage.entities.Peer.get returns results', async () => {
+		describe('importFromDatabase', () => {
+			describe('when library.storage.entities.Peer.get returns results', () => {
 				let dbPeersListResults;
 
 				beforeEach(done => {
@@ -838,7 +838,7 @@ describe('peers', async () => {
 			});
 		});
 
-		describe('discoverNew', async () => {
+		describe('discoverNew', () => {
 			beforeEach('call onBlockchainReady() and wait 100ms', done => {
 				peers.onBlockchainReady();
 				setTimeout(done, 100);
@@ -849,7 +849,7 @@ describe('peers', async () => {
 		});
 	});
 
-	describe('onPeersReady', async () => {
+	describe('onPeersReady', () => {
 		let jobsQueueSpy;
 		beforeEach(done => {
 			peersLogicMock.list = sinonSandbox.stub().returns([]);
@@ -877,7 +877,7 @@ describe('peers', async () => {
 			));
 	});
 
-	describe('discover', async () => {
+	describe('discover', () => {
 		let randomPeerStub;
 		let restoreSet;
 
@@ -909,8 +909,8 @@ describe('peers', async () => {
 		});
 	});
 
-	describe('__private', async () => {
-		describe('updatePeerStatus', async () => {
+	describe('__private', () => {
+		describe('updatePeerStatus', () => {
 			let peer;
 			let status;
 
@@ -939,7 +939,7 @@ describe('peers', async () => {
 
 			afterEach(() => sinonSandbox.restore());
 
-			describe('when no protocol version is present', async () => {
+			describe('when no protocol version is present', () => {
 				it('should call versionCompatible() with status.version', async () => {
 					delete status.protocolVersion;
 					__private.updatePeerStatus(undefined, status, peer);
@@ -949,7 +949,7 @@ describe('peers', async () => {
 				});
 			});
 
-			describe('when protocol version is present', async () => {
+			describe('when protocol version is present', () => {
 				it('should call protocolVersionCompatible() with status.protocolVersion', async () => {
 					__private.updatePeerStatus(undefined, status, peer);
 					return expect(
@@ -958,7 +958,7 @@ describe('peers', async () => {
 				});
 			});
 
-			describe('when the peer is compatible', async () => {
+			describe('when the peer is compatible', () => {
 				beforeEach(() => {
 					bindings.components.system.protocolVersionCompatible = sinonSandbox
 						.stub()

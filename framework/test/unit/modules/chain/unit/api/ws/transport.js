@@ -29,7 +29,7 @@ let registerEventEndpointsStub;
 let wsRPCMock;
 let slaveRPCStubStub;
 
-describe('TransportWSApi', async () => {
+describe('TransportWSApi', () => {
 	beforeEach(async () => {
 		transportModuleMock = {
 			internal: {

@@ -30,7 +30,7 @@ let serverMock;
 let authKeyMock;
 let error;
 
-describe('ws_rpc', async () => {
+describe('ws_rpc', () => {
 	beforeEach(async () => {
 		authKeyMock = 'valid auth key';
 		serverMock = {
@@ -46,9 +46,9 @@ describe('ws_rpc', async () => {
 		sinonSandbox.restore();
 	});
 
-	describe('wsRPC', async () => {
-		describe('get/set server', async () => {
-			describe('setServer', async () => {
+	describe('wsRPC', () => {
+		describe('get/set server', () => {
+			describe('setServer', () => {
 				let wsServerInternal;
 
 				beforeEach(async () => {
@@ -60,7 +60,7 @@ describe('ws_rpc', async () => {
 					expect(wsServerInternal).to.equal(serverMock));
 			});
 
-			describe('getServer', async () => {
+			describe('getServer', () => {
 				beforeEach(async () => {
 					ws_rpc.__set__({
 						wsServer: serverMock,
@@ -74,7 +74,7 @@ describe('ws_rpc', async () => {
 		});
 
 		// Other functions which rely on setServer and getServer.
-		describe('other functions', async () => {
+		describe('other functions', () => {
 			beforeEach(async () => {
 				wsRPC.setServer(serverMock);
 			});
@@ -89,7 +89,7 @@ describe('ws_rpc', async () => {
 						expect(result).to.equal(authKeyMock));
 				});
 
-				describe('when wsServer is undefined', async () => {
+				describe('when wsServer is undefined', () => {
 					beforeEach(async () => {
 						wsRPC.setServer(undefined);
 						error = null;
@@ -107,8 +107,8 @@ describe('ws_rpc', async () => {
 		});
 	});
 
-	describe('slaveRPCStub', async () => {
-		describe('updateMyself', async () => {
+	describe('slaveRPCStub', () => {
+		describe('updateMyself', () => {
 			beforeEach(async () => {
 				error = null;
 				try {
