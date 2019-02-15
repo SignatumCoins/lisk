@@ -128,12 +128,9 @@ Multisignature.prototype.verify = function(transaction, sender, cb) {
 	) {
 		return setImmediate(
 			cb,
-			[
-				'Invalid multisignature min. Must be between',
-				MULTISIG_CONSTRAINTS.MIN.MINIMUM,
-				'and',
-				MULTISIG_CONSTRAINTS.MIN.MAXIMUM,
-			].join(' ')
+			`Invalid multisignature min. Must be between ${
+				MULTISIG_CONSTRAINTS.MIN.MINIMUM
+			} and ${MULTISIG_CONSTRAINTS.MIN.MAXIMUM}`
 		);
 	}
 
@@ -160,12 +157,9 @@ Multisignature.prototype.verify = function(transaction, sender, cb) {
 	) {
 		return setImmediate(
 			cb,
-			[
-				'Invalid multisignature lifetime. Must be between',
-				MULTISIG_CONSTRAINTS.LIFETIME.MINIMUM,
-				'and',
-				MULTISIG_CONSTRAINTS.LIFETIME.MAXIMUM,
-			].join(' ')
+			`Invalid multisignature lifetime. Must be between ${
+				MULTISIG_CONSTRAINTS.LIFETIME.MINIMUM
+			} and ${MULTISIG_CONSTRAINTS.LIFETIME.MAXIMUM}`
 		);
 	}
 

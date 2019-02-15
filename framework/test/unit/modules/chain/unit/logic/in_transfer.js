@@ -98,7 +98,7 @@ const validGetGensisResult = {
 	authorId: 'validAuthorId',
 };
 
-describe('inTransfer', async () => {
+describe('inTransfer', () => {
 	let inTransfer;
 	let sharedStub;
 	let accountsStub;
@@ -157,8 +157,8 @@ describe('inTransfer', async () => {
 		done();
 	});
 
-	describe('constructor', async () => {
-		describe('__private', async () => {
+	describe('constructor', () => {
+		describe('__private', () => {
 			let __private;
 
 			beforeEach(done => {
@@ -186,7 +186,7 @@ describe('inTransfer', async () => {
 		});
 	});
 
-	describe('bind', async () => {
+	describe('bind', () => {
 		let modules;
 		let shared;
 
@@ -197,7 +197,7 @@ describe('inTransfer', async () => {
 			done();
 		});
 
-		describe('modules', async () => {
+		describe('modules', () => {
 			it('should assign accounts', async () =>
 				expect(modules)
 					.to.have.property('accounts')
@@ -207,15 +207,15 @@ describe('inTransfer', async () => {
 		it('should assign shared', async () => expect(shared).to.eql(sharedStub));
 	});
 
-	describe('calculateFee', async () => {
+	describe('calculateFee', () => {
 		it('should return FEES.SEND', async () =>
 			expect(inTransfer.calculateFee(trs).isEqualTo(FEES.SEND)).to.be.true);
 	});
 
-	describe('verify', async () => {
+	describe('verify', () => {
 		beforeEach(() => inTransfer.bind(accountsStub, sharedStub));
 
-		describe('when trs.recipientId exists', async () => {
+		describe('when trs.recipientId exists', () => {
 			it('should call callback with error = "Transaction type 6 is frozen"', done => {
 				trs.recipientId = '4835566122337813671L';
 				inTransfer.verify(trs, sender, err => {
@@ -225,8 +225,8 @@ describe('inTransfer', async () => {
 			});
 		});
 
-		describe('when trs.amount = 0', async () => {
-			describe('when type 6 is frozen', async () => {
+		describe('when trs.amount = 0', () => {
+			describe('when type 6 is frozen', () => {
 				it('should call callback with error = "Transaction type 6 is frozen"', done => {
 					trs.amount = 0;
 					inTransfer.verify(trs, sender, err => {
@@ -236,7 +236,7 @@ describe('inTransfer', async () => {
 				});
 			});
 
-			describe('when type 6 is not frozen', async () => {
+			describe('when type 6 is not frozen', () => {
 				it('should call callback with error = "Invalid transaction amount"', done => {
 					const originalLimit = exceptions.precedent.disableDappTransfer;
 					exceptions.precedent.disableDappTransfer = 5;
@@ -250,8 +250,8 @@ describe('inTransfer', async () => {
 			});
 		});
 
-		describe('when trs.amount is less than zero', async () => {
-			describe('when type 6 is frozen', async () => {
+		describe('when trs.amount is less than zero', () => {
+			describe('when type 6 is frozen', () => {
 				it('should call callback with error = "Transaction type 6 is frozen"', done => {
 					trs.amount = -1;
 					inTransfer.verify(trs, sender, err => {
@@ -261,7 +261,7 @@ describe('inTransfer', async () => {
 				});
 			});
 
-			describe('when type 6 is not frozen', async () => {
+			describe('when type 6 is not frozen', () => {
 				it('should call callback with error = "Invalid transaction amount"', done => {
 					const originalLimit = exceptions.precedent.disableDappTransfer;
 					exceptions.precedent.disableDappTransfer = 5;
@@ -275,7 +275,7 @@ describe('inTransfer', async () => {
 			});
 		});
 
-		describe('when trs.asset does not exist', async () => {
+		describe('when trs.asset does not exist', () => {
 			it('should call callback with error = "Transaction type 6 is frozen"', done => {
 				trs.asset = undefined;
 				inTransfer.verify(trs, sender, err => {
@@ -285,7 +285,7 @@ describe('inTransfer', async () => {
 			});
 		});
 
-		describe('when trs.asset.inTransfer does not exist', async () => {
+		describe('when trs.asset.inTransfer does not exist', () => {
 			it('should call callback with error = "Transaction type 6 is frozen"', done => {
 				trs.asset.inTransfer = undefined;
 				inTransfer.verify(trs, sender, err => {
@@ -295,7 +295,7 @@ describe('inTransfer', async () => {
 			});
 		});
 
-		describe('when trs.asset.inTransfer = 0', async () => {
+		describe('when trs.asset.inTransfer = 0', () => {
 			it('should call callback with error = "Transaction type 6 is frozen"', done => {
 				trs.asset.inTransfer = 0;
 				inTransfer.verify(trs, sender, err => {
@@ -331,7 +331,7 @@ describe('inTransfer', async () => {
 			});
 		});
 
-		describe('when entities.Transaction.isPersisted fails', async () => {
+		describe('when entities.Transaction.isPersisted fails', () => {
 			beforeEach(done => {
 				storageStub.entities.Transaction.isPersisted = sinonSandbox
 					.stub()
@@ -347,8 +347,8 @@ describe('inTransfer', async () => {
 			});
 		});
 
-		describe('when entities.Transaction.isPersisted succeeds', async () => {
-			describe('when dapp does not exist', async () => {
+		describe('when entities.Transaction.isPersisted succeeds', () => {
+			describe('when dapp does not exist', () => {
 				beforeEach(done => {
 					storageStub.entities.Transaction.isPersisted = sinonSandbox
 						.stub()
@@ -364,7 +364,7 @@ describe('inTransfer', async () => {
 				});
 			});
 
-			describe('when dapp exists', async () => {
+			describe('when dapp exists', () => {
 				beforeEach(done => {
 					storageStub.entities.Transaction.isPersisted = sinonSandbox
 						.stub()
@@ -389,7 +389,7 @@ describe('inTransfer', async () => {
 		});
 	});
 
-	describe('process', async () => {
+	describe('process', () => {
 		it('should call callback with error = null', done => {
 			inTransfer.process(trs, sender, err => {
 				expect(err).to.be.null;
@@ -405,8 +405,8 @@ describe('inTransfer', async () => {
 		});
 	});
 
-	describe('getBytes', async () => {
-		describe('when trs.asset.inTransfer.dappId = undefined', async () => {
+	describe('getBytes', () => {
+		describe('when trs.asset.inTransfer.dappId = undefined', () => {
 			beforeEach(done => {
 				trs.asset.inTransfer.dappId = undefined;
 				done();
@@ -416,7 +416,7 @@ describe('inTransfer', async () => {
 				expect(inTransfer.getBytes.bind(null, trs)).to.throw);
 		});
 
-		describe('when trs.asset.inTransfer.dappId is a valid dapp id', async () => {
+		describe('when trs.asset.inTransfer.dappId is a valid dapp id', () => {
 			it('should not throw', async () =>
 				expect(inTransfer.getBytes.bind(null, trs)).not.to.throw);
 
@@ -430,7 +430,7 @@ describe('inTransfer', async () => {
 		});
 	});
 
-	describe('applyConfirmed', async () => {
+	describe('applyConfirmed', () => {
 		beforeEach(done => {
 			inTransfer.applyConfirmed(trs, dummyBlock, sender, done);
 		});
@@ -445,7 +445,7 @@ describe('inTransfer', async () => {
 				})
 			).to.be.true);
 
-		describe('when shared.getGenesis fails', async () => {
+		describe('when shared.getGenesis fails', () => {
 			beforeEach(done => {
 				sharedStub.getGenesis = sinonSandbox
 					.stub()
@@ -459,7 +459,7 @@ describe('inTransfer', async () => {
 				}));
 		});
 
-		describe('when shared.getGenesis succeeds', async () => {
+		describe('when shared.getGenesis succeeds', () => {
 			beforeEach(done => {
 				sharedStub.getGenesis = sinonSandbox.stub().callsArg(1);
 				done();
@@ -497,7 +497,7 @@ describe('inTransfer', async () => {
 				).to.be.true);
 		});
 
-		describe('when __private.modules.accounts.mergeAccountAndGet fails', async () => {
+		describe('when __private.modules.accounts.mergeAccountAndGet fails', () => {
 			beforeEach(done => {
 				accountsStub.mergeAccountAndGet = sinonSandbox
 					.stub()
@@ -511,7 +511,7 @@ describe('inTransfer', async () => {
 				}));
 		});
 
-		describe('when __private.modules.accounts.mergeAccountAndGet succeeds', async () => {
+		describe('when __private.modules.accounts.mergeAccountAndGet succeeds', () => {
 			it('should call callback with error = undefined', async () =>
 				inTransfer.applyConfirmed(trs, dummyBlock, sender, err => {
 					expect(err).to.be.undefined;
@@ -524,7 +524,7 @@ describe('inTransfer', async () => {
 		});
 	});
 
-	describe('undoConfirmed', async () => {
+	describe('undoConfirmed', () => {
 		beforeEach(done => {
 			inTransfer.undoConfirmed(trs, dummyBlock, sender, done);
 		});
@@ -539,7 +539,7 @@ describe('inTransfer', async () => {
 				})
 			).to.be.true);
 
-		describe('when shared.getGenesis fails', async () => {
+		describe('when shared.getGenesis fails', () => {
 			beforeEach(done => {
 				sharedStub.getGenesis = sinonSandbox
 					.stub()
@@ -553,7 +553,7 @@ describe('inTransfer', async () => {
 				}));
 		});
 
-		describe('when shared.getGenesis succeeds', async () => {
+		describe('when shared.getGenesis succeeds', () => {
 			beforeEach(done => {
 				sharedStub.getGenesis = sinonSandbox.stub().callsArg(1);
 				done();
@@ -591,7 +591,7 @@ describe('inTransfer', async () => {
 				).to.be.true);
 		});
 
-		describe('when __private.modules.accounts.mergeAccountAndGet fails', async () => {
+		describe('when __private.modules.accounts.mergeAccountAndGet fails', () => {
 			beforeEach(done => {
 				accountsStub.mergeAccountAndGet = sinonSandbox
 					.stub()
@@ -605,7 +605,7 @@ describe('inTransfer', async () => {
 				}));
 		});
 
-		describe('when __private.modules.accounts.mergeAccountAndGet succeeds', async () => {
+		describe('when __private.modules.accounts.mergeAccountAndGet succeeds', () => {
 			it('should call callback with error = undefined', async () =>
 				inTransfer.undoConfirmed(trs, dummyBlock, sender, err => {
 					expect(err).to.be.undefined;
@@ -618,7 +618,7 @@ describe('inTransfer', async () => {
 		});
 	});
 
-	describe('applyUnconfirmed', async () => {
+	describe('applyUnconfirmed', () => {
 		it('should call callback with error = undefined', done => {
 			inTransfer.applyUnconfirmed(trs, sender, err => {
 				expect(err).to.be.undefined;
@@ -634,7 +634,7 @@ describe('inTransfer', async () => {
 		});
 	});
 
-	describe('undoUnconfirmed', async () => {
+	describe('undoUnconfirmed', () => {
 		it('should call callback with error = undefined', done => {
 			inTransfer.undoUnconfirmed(trs, sender, err => {
 				expect(err).to.be.undefined;
@@ -650,7 +650,7 @@ describe('inTransfer', async () => {
 		});
 	});
 
-	describe('objectNormalize', async () => {
+	describe('objectNormalize', () => {
 		let __private;
 		let schemaSpy;
 
@@ -677,7 +677,7 @@ describe('inTransfer', async () => {
 			return expect(schemaSpy.args[0][1]).to.eql(InTransfer.prototype.schema);
 		});
 
-		describe('when transaction.asset.inTransfer is invalid object argument', async () => {
+		describe('when transaction.asset.inTransfer is invalid object argument', () => {
 			typesRepresentatives.nonObjects.forEach(nonObject => {
 				it(`should throw for transaction.asset.inTransfer = ${
 					nonObject.description
@@ -688,7 +688,7 @@ describe('inTransfer', async () => {
 			});
 		});
 
-		describe('when transaction.asset.inTransfer.dappId is invalid string argument', async () => {
+		describe('when transaction.asset.inTransfer.dappId is invalid string argument', () => {
 			typesRepresentatives.nonStrings.forEach(nonString => {
 				it(`should throw for transaction.asset.inTransfer.dappId = ${
 					nonString.description
@@ -699,21 +699,21 @@ describe('inTransfer', async () => {
 			});
 		});
 
-		describe('when when transaction.asset.inTransfer is valid', async () => {
+		describe('when when transaction.asset.inTransfer is valid', () => {
 			it('should return transaction', async () =>
 				expect(inTransfer.objectNormalize(trs)).to.eql(trs));
 		});
 	});
 
-	describe('dbRead', async () => {
-		describe('when raw.in_dappId does not exist', async () => {
+	describe('dbRead', () => {
+		describe('when raw.in_dappId does not exist', () => {
 			beforeEach(async () => delete rawTrs.in_dappId);
 
 			it('should return null', async () =>
 				expect(inTransfer.dbRead(rawTrs)).to.eql(null));
 		});
 
-		describe('when raw.in_dappId exists', async () => {
+		describe('when raw.in_dappId exists', () => {
 			it('should return result containing inTransfer', async () =>
 				expect(inTransfer.dbRead(rawTrs)).to.have.property('inTransfer'));
 
@@ -724,7 +724,7 @@ describe('inTransfer', async () => {
 		});
 	});
 
-	describe('afterSave', async () => {
+	describe('afterSave', () => {
 		it('should call callback with error = undefined', async () =>
 			inTransfer.afterSave(trs, err => {
 				expect(err).to.be.undefined;
@@ -736,7 +736,7 @@ describe('inTransfer', async () => {
 			}));
 	});
 
-	describe('ready', async () => {
+	describe('ready', () => {
 		it('should return true for single signature trs', async () =>
 			expect(inTransfer.ready(trs, sender)).to.equal(true));
 
