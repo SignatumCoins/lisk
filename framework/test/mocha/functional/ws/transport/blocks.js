@@ -20,7 +20,7 @@ const wsRPC = require('../../../../../src/modules/chain/api/ws/rpc/ws_rpc')
 	.wsRPC;
 const WsTestClient = require('../../../common/ws/client');
 
-describe('WS transport blocks', async () => {
+describe('WS transport blocks', () => {
 	let connectedPeer;
 
 	before('establish client WS connection to server', done => {
@@ -66,7 +66,7 @@ describe('WS transport blocks', async () => {
 		totalForged: '0',
 	};
 
-	describe('blocks', async () => {
+	describe('blocks', () => {
 		it('using valid headers should be ok', done => {
 			connectedPeer.rpc.blocks((err, res) => {
 				__testContext.debug(
@@ -149,7 +149,7 @@ describe('WS transport blocks', async () => {
 		});
 	});
 
-	describe('blocksCommon', async () => {
+	describe('blocksCommon', () => {
 		it('using no params should fail', done => {
 			connectedPeer.rpc.blocksCommon((err, res) => {
 				__testContext.debug(
@@ -286,7 +286,7 @@ describe('WS transport blocks', async () => {
 		});
 	});
 
-	describe('postBlock', async () => {
+	describe('postBlock', () => {
 		it('should broadcast valid block', done => {
 			testBlock.transactions.forEach(transaction => {
 				if (transaction.asset && transaction.asset.delegate) {

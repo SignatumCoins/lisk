@@ -23,7 +23,7 @@ const wsRPC = require('../../../../../src/modules/chain/api/ws/rpc/ws_rpc')
 	.wsRPC;
 const WsTestClient = require('../../../common/ws/client');
 
-describe('RPC', async () => {
+describe('RPC', () => {
 	let connectedPeer;
 
 	before(done => {
@@ -47,8 +47,8 @@ describe('RPC', async () => {
 		done();
 	});
 
-	describe('internal', async () => {
-		describe('updatePeer', async () => {
+	describe('internal', () => {
+		describe('updatePeer', () => {
 			let validAcceptRequest;
 
 			beforeEach(done => {
@@ -60,7 +60,7 @@ describe('RPC', async () => {
 				done();
 			});
 
-			describe('schema', async () => {
+			describe('schema', () => {
 				it('should reject empty request', done => {
 					connectedPeer.rpc.updatePeer(undefined, err => {
 						expect(err).to.equal('Missing required property: updateType');
@@ -131,7 +131,7 @@ describe('RPC', async () => {
 		});
 	});
 
-	describe('height', async () => {
+	describe('height', () => {
 		it('should return height', done => {
 			connectedPeer.rpc.height('height', (err, result) => {
 				expect(result).to.have.property('success').to.be.ok;
@@ -144,7 +144,7 @@ describe('RPC', async () => {
 		});
 	});
 
-	describe('status', async () => {
+	describe('status', () => {
 		it('should return height, broadhash, nonce, os, version and httpPort', done => {
 			connectedPeer.rpc.status((err, result) => {
 				expect(result).to.have.property('success').to.be.ok;
@@ -175,7 +175,7 @@ describe('RPC', async () => {
 		});
 	});
 
-	describe('list', async () => {
+	describe('list', () => {
 		it('should return list of peers', done => {
 			connectedPeer.rpc.list((err, result) => {
 				expect(result).to.have.property('success').to.be.ok;
@@ -206,7 +206,7 @@ describe('RPC', async () => {
 		});
 	});
 
-	describe('blocks', async () => {
+	describe('blocks', () => {
 		it('should return height and broadhash', done => {
 			connectedPeer.rpc.blocks((err, result) => {
 				expect(result)

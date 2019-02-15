@@ -19,7 +19,7 @@ const {
 	createLoggerComponent,
 } = require('../../../../../src/components/logger');
 
-describe('components: cache', async () => {
+describe('components: cache', () => {
 	let cache;
 
 	before(async () => {
@@ -42,19 +42,19 @@ describe('components: cache', async () => {
 
 	after(() => cache.quit());
 
-	describe('bootstrap', async () => {});
+	describe('bootstrap', () => {});
 
-	describe('_onConnectionError', async () => {});
+	describe('_onConnectionError', () => {});
 
-	describe('_onReady', async () => {});
+	describe('_onReady', () => {});
 
-	describe('isReady', async () => {});
+	describe('isReady', () => {});
 
-	describe('enable', async () => {});
+	describe('enable', () => {});
 
-	describe('disable', async () => {});
+	describe('disable', () => {});
 
-	describe('getJsonForKey', async () => {
+	describe('getJsonForKey', () => {
 		it('should return null for non-existent key', async () => {
 			const key = 'test_key';
 
@@ -84,7 +84,7 @@ describe('components: cache', async () => {
 		});
 	});
 
-	describe('setJsonForKey', async () => {
+	describe('setJsonForKey', () => {
 		it('should set the key value correctly', async () => {
 			const key = 'test_key';
 			const value = {
@@ -112,7 +112,7 @@ describe('components: cache', async () => {
 		});
 	});
 
-	describe('deleteJsonForKey', async () => {
+	describe('deleteJsonForKey', () => {
 		it('should return 0 for non-existent key', async () => {
 			const key = 'test_key';
 
@@ -148,7 +148,7 @@ describe('components: cache', async () => {
 		});
 	});
 
-	describe('removeByPattern', async () => {
+	describe('removeByPattern', () => {
 		it('should remove keys matching the pattern', async () => {
 			const key = '/api/transactions?123';
 			const key2 = '/api/transactions?1234';
@@ -189,7 +189,7 @@ describe('components: cache', async () => {
 		});
 	});
 
-	describe('flushDb', async () => {
+	describe('flushDb', () => {
 		it('should remove all keys from cache', async () => {
 			const keys = ['test_key1', 'test_key2'];
 			const dummyValue = {
@@ -220,7 +220,7 @@ describe('components: cache', async () => {
 		});
 	});
 
-	describe('cleanup', async () => {});
+	describe('cleanup', () => {});
 
-	describe('quit', async () => {});
+	describe('quit', () => {});
 });

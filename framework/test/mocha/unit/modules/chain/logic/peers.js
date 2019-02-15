@@ -28,7 +28,7 @@ let masterWAMPServerMock;
 const validRPCProcedureName = 'rpcProcedureA';
 const validEventProcedureName = 'eventProcedureB';
 
-describe('peers', async () => {
+describe('peers', () => {
 	let peersModuleMock;
 	let peers;
 	let validPeer;
@@ -108,7 +108,7 @@ describe('peers', async () => {
 		);
 	}
 
-	describe('create', async () => {
+	describe('create', () => {
 		it('should always return Peer instance', async () => {
 			expect(peers.create()).to.be.an.instanceof(Peer);
 			expect(peers.create(validPeer)).to.be.an.instanceof(Peer);
@@ -118,7 +118,7 @@ describe('peers', async () => {
 		});
 	});
 
-	describe('list', async () => {
+	describe('list', () => {
 		beforeEach(() => removeAll());
 
 		it('should list peers as Peer instances', async () => {
@@ -135,7 +135,7 @@ describe('peers', async () => {
 			});
 		});
 
-		describe('when normalized', async () => {
+		describe('when normalized', () => {
 			it('should list peers as objects when normalized', async () => {
 				peers.upsert(validPeer);
 				return peers.list(true).forEach(peer => {
@@ -152,7 +152,7 @@ describe('peers', async () => {
 		});
 	});
 
-	describe('listRandomConnected', async () => {
+	describe('listRandomConnected', () => {
 		beforeEach(() => removeAll());
 
 		it('should return list of peers', async () => {
@@ -187,7 +187,7 @@ describe('peers', async () => {
 		});
 	});
 
-	describe('upsert', async () => {
+	describe('upsert', () => {
 		beforeEach(() => removeAll());
 
 		it('should insert new peers', async () => {
@@ -265,7 +265,7 @@ describe('peers', async () => {
 			return expect(_.isEqual(demandedIps.sort(), listIps.sort())).to.be.ok;
 		});
 
-		describe('should fail with valid error code', async () => {
+		describe('should fail with valid error code', () => {
 			it('INSERT_ONLY_FAILURE when insertOnly flag is present and peer already exists', async () => {
 				peers.upsert(validPeer);
 				return expect(peers.upsert(validPeer, true)).to.equal(
@@ -288,7 +288,7 @@ describe('peers', async () => {
 		});
 	});
 
-	describe('exists', async () => {
+	describe('exists', () => {
 		beforeEach(() => removeAll());
 
 		it('should return false if peer is not on the list', async () =>
@@ -331,7 +331,7 @@ describe('peers', async () => {
 		});
 	});
 
-	describe('get', async () => {
+	describe('get', () => {
 		beforeEach(() => removeAll());
 
 		it('should return inserted peer', async () => {
@@ -350,7 +350,7 @@ describe('peers', async () => {
 			expect(peers.get(validPeer)).to.be.undefined);
 	});
 
-	describe('remove', async () => {
+	describe('remove', () => {
 		beforeEach(() => removeAll());
 
 		it('should remove added peer', async () => {

@@ -18,7 +18,7 @@ const ip = require('ip');
 const prefixedPeer = require('../../../../fixtures/peers').randomNormalizedPeer;
 const Peer = require('../../../../../../src/modules/chain/logic/peer.js');
 
-describe('peer', async () => {
+describe('peer', () => {
 	let peer;
 
 	beforeEach(done => {
@@ -26,7 +26,7 @@ describe('peer', async () => {
 		done();
 	});
 
-	describe('constructor', async () => {
+	describe('constructor', () => {
 		it('should create Peer with all properties implemented', async () => {
 			const __peer = new Peer({ ip: '127.0.0.1', wsPort: 4000 });
 			expect(__peer)
@@ -44,7 +44,7 @@ describe('peer', async () => {
 		});
 	});
 
-	describe('accept', async () => {
+	describe('accept', () => {
 		it('should accept valid peer', async () => {
 			const auxPeer = new Peer({});
 			const __peer = auxPeer.accept(prefixedPeer);
@@ -71,7 +71,7 @@ describe('peer', async () => {
 		});
 	});
 
-	describe('parseInt', async () => {
+	describe('parseInt', () => {
 		it('should always return a number', async () => {
 			expect(peer.parseInt('1')).to.equal(1);
 			return expect(peer.parseInt(1)).to.equal(1);
@@ -84,7 +84,7 @@ describe('peer', async () => {
 		});
 	});
 
-	describe('applyHeaders', async () => {
+	describe('applyHeaders', () => {
 		it('should not apply random values to the peer scope', async () => {
 			peer.applyHeaders({ headerA: 'HeaderA' });
 			return expect(peer.headerA).to.not.exist;
@@ -123,7 +123,7 @@ describe('peer', async () => {
 		});
 	});
 
-	describe('update', async () => {
+	describe('update', () => {
 		it('should not apply random values to the peer scope', async () => {
 			peer.update({ someProp: 'someValue' });
 			return expect(peer.someProp).to.not.exist;
@@ -224,7 +224,7 @@ describe('peer', async () => {
 		});
 	});
 
-	describe('object', async () => {
+	describe('object', () => {
 		it('should create proper copy of peer', async () => {
 			const __peer = new Peer(prefixedPeer);
 			const peerCopy = __peer.object();

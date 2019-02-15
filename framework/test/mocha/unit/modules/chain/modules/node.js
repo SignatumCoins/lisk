@@ -22,7 +22,7 @@ const Node = require('../../../../../../src/modules/chain/modules/node');
 
 const { EPOCH_TIME, FEES } = global.constants;
 
-describe('node', async () => {
+describe('node', () => {
 	const testDelegate = genesisDelegates.delegates[0];
 	let defaultPassword;
 	let library;
@@ -46,7 +46,7 @@ describe('node', async () => {
 		application.cleanup(done);
 	});
 
-	describe('constructor', async () => {
+	describe('constructor', () => {
 		let rewiredNodeModule;
 
 		before(done => {
@@ -54,7 +54,7 @@ describe('node', async () => {
 			done();
 		});
 
-		describe('library', async () => {
+		describe('library', () => {
 			let privateLibrary;
 
 			before(done => {
@@ -128,7 +128,7 @@ describe('node', async () => {
 		});
 	});
 
-	describe('internal', async () => {
+	describe('internal', () => {
 		let node_module;
 
 		before(done => {
@@ -156,7 +156,7 @@ describe('node', async () => {
 			);
 		}
 
-		describe('updateForgingStatus', async () => {
+		describe('updateForgingStatus', () => {
 			before(done => {
 				defaultPassword = library.config.forging.defaultPassword;
 				done();
@@ -246,7 +246,7 @@ describe('node', async () => {
 			});
 		});
 
-		describe('getForgingStatus', async () => {
+		describe('getForgingStatus', () => {
 			it('should return delegate full list when publicKey is not provided', done => {
 				node_module.internal.getForgingStatus(null, (err, data) => {
 					expect(err).to.be.null;
@@ -325,7 +325,7 @@ describe('node', async () => {
 		});
 	});
 
-	describe('shared', async () => {
+	describe('shared', () => {
 		let node_module;
 
 		before(done => {
@@ -333,7 +333,7 @@ describe('node', async () => {
 			done();
 		});
 
-		describe('getConstants', async () => {
+		describe('getConstants', () => {
 			let getConstantsError;
 			let getConstantsResult;
 
@@ -345,7 +345,7 @@ describe('node', async () => {
 				});
 			});
 
-			describe('when loaded = false', async () => {
+			describe('when loaded = false', () => {
 				before(done => {
 					library.rewiredModules.node.__set__('loaded', false);
 					done();
@@ -362,7 +362,7 @@ describe('node', async () => {
 				});
 			});
 
-			describe('when loaded = true', async () => {
+			describe('when loaded = true', () => {
 				let getLastBlockSpy;
 
 				before(done => {
@@ -471,8 +471,8 @@ describe('node', async () => {
 			});
 		});
 
-		describe('getStatus', async () => {
-			describe('when loaded = false', async () => {
+		describe('getStatus', () => {
+			describe('when loaded = false', () => {
 				before(done => {
 					library.rewiredModules.node.__set__('loaded', false);
 					done();
@@ -491,7 +491,7 @@ describe('node', async () => {
 				});
 			});
 
-			describe('when loaded = true', async () => {
+			describe('when loaded = true', () => {
 				it('should call callback with error = null', done => {
 					node_module.shared.getStatus(null, err => {
 						expect(err).to.not.exist;
@@ -560,7 +560,7 @@ describe('node', async () => {
 					});
 				});
 
-				describe('modules.loader.getNetwork', async () => {
+				describe('modules.loader.getNetwork', () => {
 					beforeEach(done => {
 						stubs.networkHeight = sinonSandbox
 							.stub()
@@ -584,7 +584,7 @@ describe('node', async () => {
 						});
 					});
 
-					describe('if modules.peers.networkHeight returns networkHeight as null', async () => {
+					describe('if modules.peers.networkHeight returns networkHeight as null', () => {
 						it('should call callback with result containing networkHeight = null', done => {
 							library.modules.peers.networkHeight = sinonSandbox
 								.stub()
@@ -605,7 +605,7 @@ describe('node', async () => {
 		});
 	});
 
-	describe('onBind', async () => {
+	describe('onBind', () => {
 		let rewiredNodeModule;
 
 		before(done => {
@@ -613,7 +613,7 @@ describe('node', async () => {
 			done();
 		});
 
-		describe('modules', async () => {
+		describe('modules', () => {
 			let privateModules;
 
 			before(done => {
